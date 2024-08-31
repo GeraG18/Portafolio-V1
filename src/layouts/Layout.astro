@@ -1,4 +1,8 @@
 ---
+import { ViewTransitions } from "astro:transitions";
+/* Icomoon for custom icons */
+import '../styles/icomoon/style.css';
+
 interface Props {
 	title: string;
 }
@@ -7,7 +11,7 @@ const { title } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="es">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content="Astro description" />
@@ -15,28 +19,156 @@ const { title } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+
+		<!-- PRECONNECT -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<!-- FONTS -->
+		<link href="https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&display=swap" rel="stylesheet">
+		<!-- ICONS -->
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+		<!-- View Transitions -->
+		<ViewTransitions />
 	</head>
-	<body>
+	<body class="preload">
 		<slot />
 	</body>
 </html>
 <style is:global>
 	:root {
-		--accent: 136, 58, 234;
+		--mouse-x: 0px;
+  		--mouse-y: 0px;
+
+		--background: #FFFFFF;
+		--backgroundRGB: rgb(255,255,255);
+		--backgroundRGBA: rgba(255,255,255, 0.6);
+		--accent-text: #3D4043;/*circle*/
+		--text: #212330;
+		--textRGB: rgb(33, 35, 48);
+		--text-gray: #8B8B8B;
+		--text-grayRGB: rgb(139, 139, 139);
+		--accent: #3773E0;
+		--accentRGB: rgb(55,115,224);
+		--accent-darker: #3666A1;
+		--accent-darkerRGB: rgb(54, 102, 161);
+		--new-accent: #87BFFF;
+		--bright-accent: #0067ff;
+
+		/* --accent: 136, 58, 234;
 		--accent-light: 224, 204, 250;
-		--accent-dark: 49, 10, 101;
+		--accent-dark: 49, 10, 101; */
 		--accent-gradient: linear-gradient(
 			45deg,
-			rgb(var(--accent)),
-			rgb(var(--accent-light)) 30%,
+			var(--bright-accent),
+			var(--accent) 30%,
 			white 60%
 		);
+
+		--accent-gradient-test: linear-gradient(
+			45deg,
+			var(--accent),
+			var(--accent-darkerRGB) 30%,
+			white 60%
+		);
+
 	}
+
+	h1 {
+		font-size: 2.25rem;
+		/* font-weight: 700; */
+		line-height: 1;
+		text-align: start;
+		margin-top: 0.5rem;
+		margin-bottom: 0.5rem;
+		&.title {
+			font-size: 3rem;
+		}
+	}
+
+	.text-gradient {
+		background-image: var(--accent-gradient-test);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-size: 400%;
+		background-position: 0%;
+	}
+
+	.two-line-trunc {
+		display: -webkit-box;
+		max-width: 100%;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+	body.preload *{
+		animation-duration: 0s !important;
+		-webkit-animation-duration: 0s !important;
+		transition:background-color 0s, opacity 0s, color 0s, width 0s, height 0s, padding 0s, margin 0s !important;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	span:not(.material-symbols-rounded),
+	div:not(.download-icon),
+	button,
+	p {
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+		color: var(--accent-text);
+	}
+
+	.material-symbols-rounded {
+		font-variation-settings:
+		'FILL' 0,
+		'wght' 300,
+		'GRAD' 0,
+		'opsz' 24
+	}
+
+	.kode-mono {
+		font-family: "Kode Mono", monospace;
+		font-optical-sizing: auto;
+		font-weight: 400;
+		font-style: normal;
+	}
+
+	/* 
+	12px - 14px small text
+	16px - base text
+	18px - big text
+	20px - subtitles maybe
+	30px - subtitles
+	48px - title
+	*/
+
 	html {
-		font-family: system-ui, sans-serif;
-		background: #13151a;
+		font-family: "Exo", sans-serif !important;
+		font-optical-sizing: auto;
+		font-weight: 400;
+		font-style: normal;
+
+		background: var(--background);
+		color: var(--text);
+		animation-timing-function: linear;
 		background-size: 224px;
+		scroll-behavior: smooth !important;
 	}
+
+	body {
+		overscroll-behavior: none;
+		scroll-behavior: smooth;
+	}
+
 	code {
 		font-family:
 			Menlo,
@@ -48,4 +180,19 @@ const { title } = Astro.props;
 			Courier New,
 			monospace;
 	}
+
+	@media (prefers-reduced-motion: reduce) {
+		html {
+			scroll-behavior: auto;
+		}
+	}
 </style>
+
+<script>
+
+	document.addEventListener("astro:page-load", () => {
+		setTimeout(function(){
+		    document.body.className="";
+		},500);
+	});
+</script>

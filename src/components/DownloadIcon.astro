@@ -1,0 +1,41 @@
+<div class="download-icon" id="download-icon">
+    <span class="material-symbols-rounded top-icon">
+        keyboard_arrow_down
+        </span>
+    <span class="material-symbols-rounded bottom-icon">
+        check_indeterminate_small
+    </span>
+</div>
+
+<style>
+    .download-icon {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .download-icon .top-icon {
+        -webkit-animation: mover 1s infinite  alternate;
+        animation: mover 1s infinite  alternate;
+        margin-bottom: -1rem;
+    }
+
+    .download-icon .bottom-icon {
+        margin-bottom: -0.5rem;
+    }
+
+    img.vert-move {
+        -webkit-animation: mover 1s infinite  alternate;
+        animation: mover 1s infinite  alternate;
+    }
+
+    @-webkit-keyframes mover {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(-5px); }
+    }
+
+    @keyframes mover {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(-5px); }
+    }
+
+</style>

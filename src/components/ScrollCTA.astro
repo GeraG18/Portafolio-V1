@@ -1,0 +1,74 @@
+---
+/* props here */
+---
+
+<div id="scrollCTA-button" class="w-fit h-[5rem] absolute bottom-0 flex flex-col items-center justify-center opacity-90 z-[500]">
+    <div class="scrollCTA__body">
+        <span class="material-symbols-rounded">
+            keyboard_double_arrow_down
+        </span>
+    </div>
+    <span class="scrollCTA__title">SCROLL</span>
+</div>
+
+<style>
+    .scrollCTA__body {
+        border: 1px solid var(--text-gray);
+        border-radius: 9999px;
+        width: 1.5rem;
+        height: 3rem;
+        flex: none;
+        display: flex;
+        justify-content: center;
+        /* align-items: center; */
+    }
+
+    .scrollCTA__body span {
+        -webkit-animation-duration: 1.8s;
+        animation-duration: 1.8s;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+        -webkit-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
+        -webkit-animation-name: scroll;
+        animation-name: scroll;
+    }
+
+    @keyframes scroll {
+    0% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: translateY(20px);
+        -ms-transform: translateY(20px);
+        transform: translateY(20px);
+    }
+    }
+
+    .scrollCTA__title {
+        flex: none;
+        color: var(--text-gray);
+        font-size: 1rem;
+    }
+</style>
+<script>
+    /* HTMLElement */
+    let blocksBody: HTMLElement | null = document.getElementById('block-container');
+    let scrollCTAButton: HTMLElement | null = document.getElementById('scrollCTA-button');
+
+    /* number */
+    let viewWidth: number = window.innerWidth;
+    let viewHeight: number = window.innerHeight;
+
+    /* Init Zone */
+    scrollCTAButton !== null ? 
+    scrollCTAButton.addEventListener("click", (event) => {
+        blocksBody !== null ? blocksBody.scrollTo(0,blocksBody.scrollTop + viewHeight) : null;
+    })
+    : null;
+
+</script>

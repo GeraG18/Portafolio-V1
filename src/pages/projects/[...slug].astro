@@ -1,0 +1,311 @@
+---
+import EmailDecorator from '@/components/EmailDecorator.astro';
+import Layout from '../../layouts/Layout.astro';
+import ScrollCTA from '@/components/ScrollCTA.astro';
+import { getCollection } from "astro:content";
+import NavigationBack from '@/components/NavigationBack.astro';
+import LinkButton from '@/components/LinkButton.astro';
+
+interface project {
+    title: string;
+    technologies: string[];
+    description: string;
+    urls: {name: string, url: string}[];
+    images: string[];
+    startDate: string;
+    endDate: string;
+    role: string;
+    slug: string;
+}
+
+export async function getStaticPaths() {
+    const projects = await getCollection('projects');
+
+    return projects.map((item) => (
+        {
+            params: {slug: item.slug},
+            props: item,
+
+        }
+    ));
+}
+
+function getFormattedDate(input: string) {
+	if(input !== 'ACTUALIDAD') {
+		let date = new Date(input);
+		// let month = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+	
+		let day = date.getDate();
+		let month = date.getMonth()+1;
+		return `${day < 10 ? `0${day}`: day}/${month < 10 ? `0${month}`: month}/${date.getFullYear()}`;
+	} else {
+		return input;
+	}
+}
+
+const project = Astro.props;
+const {	Content	} = await project.render();
+const {	data } = project;
+// console.log('slug',project);
+---
+
+<Layout title={'Detalles'+(data?.title ? ' de '+data?.title : 'del Proyecto')+" | Gerardo G."}>
+	<main>
+		<div class="items-center justify-center flex gap-4 flex-col h-[100vh] w-[8rem]">
+			<NavigationBack icon='arrow_back' tooltip='Todos los proyectos' href='/projects'/>
+			<NavigationBack icon='home' tooltip='Volver al inicio' href='/'/>
+		</div>
+		<div id="block-container" class="container max-w-screen-xl !mx-2.5 md:!mx-20 2xl:!mx-auto">
+			
+			<div class="w-full grid grid-cols-5 gap-[3rem] relative">
+				<div class="col-span-3 w-full h-fit text-lg !pb-[3rem]">
+					<h1 class="w-full text-start !py-6 uppercase bg-[--background]">PROYECTO <span class="text-gradient">{data?.title}</span></h1>
+					<Content/>
+				</div>
+				<div class="col-span-2 w-full h-fit flex gap-4 flex-col items-center justify-start friendly-sticky !top-0">
+					<div class="aspect-video relative rounded-lg w-full border border-[--text-gray] overflow-hidden group flex items-center justify-center">
+						{
+						data?.image ? 
+						<img src={data?.image} alt="" 
+						class="absolute grayscale inset-0 h-full w-full object-cover group-hover:scale-110 group-hover:grayscale-0 transition-transform duration-500 ease-in-out !border-none"/>
+						: 
+						<div class="absolute bg-gray-200 w-full h-full text-[--text] text-lg flex flex-col items-center justify-center">
+							<span class="material-symbols-rounded text-2xl">
+								image
+							</span>
+							<span>Sin imagen</span>
+						</div>
+						}
+					</div>
+					<div class="w-full h-[1px] bg-[--text-gray]"></div>
+					<span class="w-full font-semibold !text-lg">Tecnologías usadas:</span>
+					<div class="w-full flex-none flex flex-wrap gap-2 text-sm items-center justify-start overflow-y-auto overflow-x-hidden">
+						{(data?.technologies)?.map((tech:string) => (
+							<span class="capitalize !px-2 border-[1px] border-[--accent-darker] rounded-full !text-[--accent-darker] flex-none flex items-center justify-center gap-1"> 
+								<i class={"icon icon-"+tech}></i>
+								{tech.replace('-',' ')}
+							</span>
+						))}
+					</div>
+					<span class="w-full font-semibold !text-lg">Roles:</span>
+					<p class="w-full !text-lg">{data?.role}</p>
+					<span class="w-full font-semibold !text-lg">Links:</span>
+					<div class="w-full flex-none flex flex-wrap gap-2 text-sm items-center justify-start overflow-y-auto overflow-x-hidden">
+						{data?.urls.length === 0 ? <span class="!text-lg w-full !text-[--text-gray]">No hay links</span> : ''}
+						{(data?.urls).map(({name, url}:{name: string, url:string}) => (
+						<LinkButton  target="_blank" width="[14rem]" extraClasses="!text-base !py-1" id="linkedinButton" href={url}>
+							{name} 
+							<span class="material-symbols-rounded">
+								captive_portal
+							</span>
+						</LinkButton>
+						))}
+					</div>
+					<span class="w-full font-semibold !text-lg">Fecha:</span>
+					<div class="w-full !text-lg">
+						<!-- <span class="material-symbols-rounded">
+						calendar_month
+						</span> -->
+						{getFormattedDate(data?.startDate)} {data?.endDate !== '' ? '-' : ''} {getFormattedDate(data?.endDate)}
+					</div>
+				</div>
+
+			</div>
+			
+		</div>
+		<div class="items-center justify-center relative hidden md:flex flex-col h-[100vh] w-[8rem]">
+			<!-- <ScrollNumber/> -->
+			<EmailDecorator/>
+		</div>
+		<ScrollCTA/>
+
+	</main>
+</Layout>
+
+<style>
+	main {
+		margin: 0;
+		padding: 0;
+		/* margin: auto;
+		width: 800px;
+		max-width: calc(100% - 2rem); */
+		font-size: 20px;
+		line-height: 1.6;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		/* background-color: aqua; */
+		scroll-behavior: smooth;
+	}
+
+	.friendly-sticky {
+		position: -webkit-sticky; 
+		position: sticky; 
+	}
+
+	ul .timeline {
+		list-style-type: none;
+		position: relative;
+	}
+
+	ul .timeline li {
+		margin: 3rem 0px;
+		padding-left: 20px;
+	}
+
+	.email {
+        cursor: pointer;
+        flex: none;
+		height: 2rem;
+        margin-bottom: 0.5rem;
+        color: var(--text-gray);
+        padding: 4px;
+    }
+
+    .email:hover {
+        font-weight: 600;
+        padding-bottom: 0.5rem;
+        
+        background: linear-gradient(45deg, var(--accent-darker) 0%, var(--accent) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+        box-decoration-break: clone;
+        -webkit-box-decoration-break: clone;
+    }
+
+	ul .timeline::before {
+		content: " ";
+		background: var(--text-gray);
+		display: inline-block;
+		position: absolute;
+		left: 0px;
+		width: 1px;
+		top: 4px;
+		height: 100%;
+		z-index: 400;
+	}
+
+	ul .timeline li::after, ::before {
+		box-sizing: border-box;
+	}
+
+	ul .timeline li::before {
+		content: " ";
+		background: var(--background);
+		display: inline-block;
+		position: absolute;
+		border-radius: 50%;
+		border: 2px solid var(--accent-text);
+		left: -7px;
+		width: 15px;
+		height: 15px;
+		margin-top: 3px;
+		z-index: 400;
+	}
+
+	ul.timeline li a.float-right {
+		text-decoration: underline;
+		font-size: calc(var(--font-sm) + 0.9px);
+	}
+
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		scroll-behavior: smooth;
+	}
+
+	.container {
+		width: 100%;
+		height: 100vh;
+		/* margin: 8rem 0px 0px 0px; */
+		/* padding: 0px 2rem 2rem 2rem; */
+		padding: 8rem 2rem 2rem 2rem;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: start;
+		scroll-snap-type: y mandatory;
+		overflow-y: scroll;
+		scroll-behavior: smooth;
+		/* border: 1px solid red; */
+		/* background-color: rebeccapurple; */
+	}
+
+	.container::-webkit-scrollbar {
+		display: none;
+	}
+
+	section {
+		height: 100vh;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		scroll-snap-align: start;
+		position: relative;
+	}
+
+	/* section::after {
+		content: '';
+		z-index: 400;
+		width:100%;
+		height: 2rem;
+		position: absolute;
+		background-color: var(--background);
+		top: 0;
+		mask-image: linear-gradient(black 20%, transparent);
+	}
+
+	section::before {
+		content: '';
+		z-index: 400;
+		width:100%;
+		height: 2rem;
+		position: absolute;
+		background-color: var(--background);
+		bottom: 0;
+		mask-image: linear-gradient(black 20%, transparent);
+		transform: rotate(180deg);
+	} */
+
+	.image-mask {
+		mask-image: linear-gradient(black 70%, transparent);
+	}
+
+	.astro-a {
+		position: absolute;
+		top: -32px;
+		left: 50%;
+		transform: translatex(-50%);
+		width: 220px;
+		height: auto;
+		z-index: -1;
+	}
+
+	.instructions {
+		margin-bottom: 2rem;
+		border: 1px solid rgba(var(--accent-light), 25%);
+		background: linear-gradient(rgba(var(--accent-dark), 66%), rgba(var(--accent-dark), 33%));
+		padding: 1.5rem;
+		border-radius: 8px;
+	}
+	.instructions code {
+		font-size: 0.8em;
+		font-weight: bold;
+		background: rgba(var(--accent-light), 12%);
+		color: rgb(var(--accent-light));
+		border-radius: 4px;
+		padding: 0.3em 0.4em;
+	}
+	.instructions strong {
+		color: rgb(var(--accent-light));
+	}
+	.link-card-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
+		gap: 2rem;
+		padding: 0;
+	}
+</style>

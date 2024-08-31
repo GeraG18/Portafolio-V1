@@ -1,0 +1,117 @@
+---
+/* Props here */
+---
+
+<div class="flex flex-col items-center justify-center gap-1">
+    <div id="up-scroll-button" class="scroll-bar">
+        <span class="material-symbols-rounded">
+            keyboard_arrow_up
+        </span>
+        <div class="bar"></div>
+    </div>
+
+    <span id="scroll-span-inner" class="kode-mono !text-2xl text-[--text-gray]"></span>
+
+    <div id="down-scroll-button" class="scroll-bar">
+        <div class="bar"></div>
+        <span class="material-symbols-rounded">
+            keyboard_arrow_down
+        </span>
+    </div>
+</div>
+
+<style>
+    .scroll-bar {
+        width: 100%;
+        height: 3.3rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .scroll-bar .bar {
+        width: 2px;
+        flex: none;
+        height: 2.2rem;
+        background: var(--text-gray);
+        font-size: 1rem;
+    }
+
+    .scroll-bar span {
+        opacity: 1;
+        transition: opacity 0.4s linear;
+        color: var(--text-gray);
+    }
+    
+    /* .scroll-bar:hover span{
+        opacity: 1;
+    } */
+
+</style>
+
+<script>
+    document.addEventListener("astro:page-load", () => {
+
+        /* number */
+        let viewWidth: number = window.innerWidth;
+        let viewHeight: number = window.innerHeight;
+        let lastScrollPosition: number  = 0;
+        let pageCounter: number = 1;
+    
+        /* HTMLElement */
+        let blocksBody: HTMLElement | null = document.getElementById('block-container');
+        let span: HTMLElement | null = document.getElementById('scroll-span-inner');
+        let upButton: HTMLElement | null = document.getElementById('up-scroll-button');
+        let downButton: HTMLElement | null = document.getElementById('down-scroll-button');
+    
+        /* Init Zone */
+        span !== null ? span.innerText = pageCounter.toLocaleString('es-MX', {minimumIntegerDigits: 2,useGrouping: false}) : null;
+    
+        blocksBody !== null ? 
+        blocksBody.addEventListener("scroll", (event) => {
+            let actualScrollPosition: number = blocksBody.scrollTop;
+
+            switch (actualScrollPosition) {
+                case viewHeight*0:
+                    pageCounter = 1;
+                    break;
+    
+                case viewHeight*1:
+                    pageCounter = 2;
+                    break;
+                case viewHeight*2:
+                    pageCounter = 3;
+                    break;
+                case viewHeight*3:
+                    pageCounter = 4;
+                    break;
+                case viewHeight*4:
+                    pageCounter = 5;
+                    break;
+                default:
+                    break;
+            }
+    
+            span !== null ? span.innerText = pageCounter.toLocaleString('es-MX', {minimumIntegerDigits: 2,useGrouping: false}) : null;
+        })
+        : null;
+    
+        upButton !== null ? 
+        upButton.addEventListener("click", (event) => {
+            blocksBody !== null ? blocksBody.scrollTo(0,blocksBody.scrollTop - viewHeight) : null;
+        })
+        : null;
+    
+        downButton !== null ? 
+        downButton.addEventListener("click", (event) => {
+            blocksBody !== null ? blocksBody.scrollTo(0,blocksBody.scrollTop + viewHeight) : null;
+        })
+        : null;
+    
+        /* Functions Zone */
+    })
+ 
+</script>

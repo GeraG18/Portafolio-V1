@@ -1,0 +1,35 @@
+---
+const { href, id, width, target, extraClasses } = Astro.props
+
+const actualClasses: string = `
+    inline-flex items-center justify-center gap-2 px-3 py-2 space-x-2 
+    text-xl text-[--text] transition bg-transparent border border-[--text] 
+    focus-visible:ring-[--accent-dark] text-md hover:bg-[--text]
+    group rounded-full hover:text-[--background] focus:outline-none focus-visible:outline-none 
+    focus-visible:ring focus-visible:ring-offset-2
+    `
+---
+
+<a id={id} role="link" href={href} target={target}
+    class={extraClasses+' '+actualClasses+' !w-'+width}
+    >
+  <slot />
+</a>
+
+<style>
+  a .material-symbols-rounded {
+    color: var(--text);
+  }
+
+  a:hover .material-symbols-rounded {
+    color: white;
+  }
+
+  a .download-icon .material-symbols-rounded {
+    color: var(--text);
+  }
+
+  a:hover .download-icon .material-symbols-rounded {
+    color: white;
+  }
+</style>

@@ -1,0 +1,52 @@
+---
+/* Props here */
+---
+<div class="email-decorator">
+
+    <a href="mailto:gera.g.dev@gmail.com" class="text-base">gera.g.dev@gmail.com</a>
+    <div class="bar flex-none"></div>
+
+</div>
+<style>
+    .email-decorator {
+        z-index: 500;
+        position: absolute;
+        bottom: 0;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        /* transform: rotate(90deg); */
+        writing-mode: vertical-lr;
+    }
+    
+    .email-decorator .bar {
+        width: 2px;
+        height: 4rem;
+        flex: none;
+        background: var(--text-gray);
+        font-size: 1rem;
+    }
+
+    .email-decorator a {
+        cursor: pointer;
+        flex: none;
+        margin-bottom: 0.5rem;
+        color: var(--text-gray);
+        padding: 4px;
+    }
+
+    .email-decorator a:hover {
+        font-weight: 600;
+        padding-bottom: 0.5rem;
+        
+        background: linear-gradient(45deg, var(--accent-darker) 0%, var(--accent) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+        box-decoration-break: clone;
+        -webkit-box-decoration-break: clone;
+    }
+</style>
+<script></script>

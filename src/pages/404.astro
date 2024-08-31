@@ -1,0 +1,157 @@
+---
+import Layout from '../layouts/Layout.astro';
+import NavigationBack from '@/components/NavigationBack.astro';
+
+// let pageRoute = window.location.pathname;
+---
+
+<Layout title="Todos los Proyectos | Gerardo G.">
+	<main>
+		<div class="items-center justify-center flex flex-col h-[100vh] w-[8rem]">
+			<NavigationBack icon='arrow_back' tooltip='Volver a inicio' href='/'/>
+		</div>
+		
+		<div id="block-container" class="container !overflow-x-hidden !overflow-y-auto gap-4">
+			
+            <h1>:-(</h1>
+			<h1 class="text-start">ERROR <span class="text-gradient">404</span></h1>
+            <div class="flex flex-col items-center justify-center">
+                <p>¿De verdad intentaste ir a "<span id="pageRoute"></span>"?</p>
+                <p>Siento decepcionarte, pero aquí no hay nada.</p>
+            </div>
+			
+		
+		</div>
+		<div class="items-center justify-center relative hidden md:flex flex-col h-[100vh] w-[8rem]">
+			<!-- <ScrollNumber/> -->
+			<!-- <EmailDecorator/> -->
+		</div>
+		<!-- <ScrollCTA/> -->
+
+	</main>
+</Layout>
+
+<script>
+    document.addEventListener("astro:page-load", () => {
+        console.log('page load', window.location.pathname);
+        let htmlElement = document.getElementById('pageRoute');
+        
+        if(htmlElement) {
+            htmlElement.innerHTML = window.location.pathname;
+        }
+    });
+</script>
+
+<style>
+	main {
+		margin: 0;
+		padding: 0;
+		/* margin: auto;
+		width: 800px;
+		max-width: calc(100% - 2rem); */
+		font-size: 20px;
+		line-height: 1.6;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		/* background-color: aqua; */
+		scroll-behavior: smooth;
+	}
+
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		scroll-behavior: smooth;
+	}
+
+	.container {
+		width: 100%;
+		height: 100vh;
+		padding: 2rem 0px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		scroll-snap-type: y mandatory;
+		overflow-y: scroll;
+		scroll-behavior: smooth;
+		/* border: 1px solid red; */
+		/* background-color: rebeccapurple; */
+	}
+
+	.container::-webkit-scrollbar {
+		display: none;
+	}
+
+	section {
+		height: 100vh;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		scroll-snap-align: start;
+		position: relative;
+	}
+
+	/* section::after {
+		content: '';
+		z-index: 400;
+		width:100%;
+		height: 2rem;
+		position: absolute;
+		background-color: var(--background);
+		top: 0;
+		mask-img: linear-gradient(black 20%, transparent);
+	}
+
+	section::before {
+		content: '';
+		z-index: 400;
+		width:100%;
+		height: 2rem;
+		position: absolute;
+		background-color: var(--background);
+		bottom: 0;
+		mask-img: linear-gradient(black 20%, transparent);
+		transform: rotate(180deg);
+	} */
+
+	.img-mask {
+		mask-img: linear-gradient(black 90%, transparent);
+	}
+
+	.astro-a {
+		position: absolute;
+		top: -32px;
+		left: 50%;
+		transform: translatex(-50%);
+		width: 220px;
+		height: auto;
+		z-index: -1;
+	}
+
+	.instructions {
+		margin-bottom: 2rem;
+		border: 1px solid rgba(var(--accent-light), 25%);
+		background: linear-gradient(rgba(var(--accent-dark), 66%), rgba(var(--accent-dark), 33%));
+		padding: 1.5rem;
+		border-radius: 8px;
+	}
+	.instructions code {
+		font-size: 0.8em;
+		font-weight: bold;
+		background: rgba(var(--accent-light), 12%);
+		color: rgb(var(--accent-light));
+		border-radius: 4px;
+		padding: 0.3em 0.4em;
+	}
+	.instructions strong {
+		color: rgb(var(--accent-light));
+	}
+	.link-card-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
+		gap: 2rem;
+		padding: 0;
+	}
+</style>

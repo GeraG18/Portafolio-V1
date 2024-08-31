@@ -1,0 +1,168 @@
+---
+interface Props {
+	icon: string;
+	tooltip: string;
+	href: string;
+}
+
+const { icon, tooltip, href } = Astro.props;
+/* 
+	╭─────╮  Houston:
+	│ ◠ ◡ ◠  See you around, astronaut.
+	╰─────╯
+*/
+---
+<!-- (href !== '' && Astro.url.pathname.startsWith(href)) -->
+<nav>
+
+    <div class="group flex relative items-center justify-center rounded-full">
+      <a id="experience-button" class="nav-button" href={href} aria-label="experience">
+        <span class="material-symbols-rounded">
+            {icon}
+        </span>
+      </a>
+      
+      <div class="absolute left-0 items-center hidden ml-[4.5rem] group-hover:flex h-fit">
+        <span class="relative !min-w-fit w-full z-10 p-2 tooltip shadow-lg">
+            {tooltip}
+        </span>
+      </div>
+    </div>
+
+</nav>
+<style>
+    nav {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .tooltip {
+      color: var(--text-gray);
+      border: 2px solid var(--text-gray);
+      background-color: var(--background);
+		  /* backdrop-filter: blur(6px); */
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 10rem;
+      animation: border-animation 2s infinite linear;
+    }
+
+    .nav-button {
+        width: 4rem;
+        height: 4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid var(--text-gray);
+        color: var(--text-gray);
+        border-radius: 999px;
+        cursor: pointer;
+    }
+
+    .active {
+        border-color: var(--bright-accent);
+        color: var(--bright-accent);
+        /* background: linear-gradient(45deg, var(--accent-darker) 0%, var(--accent) 100%) ;
+        color: white; */
+        /* -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+        box-decoration-break: clone;
+        -webkit-box-decoration-break: clone; */
+    }
+
+    .nav-button.active:hover{
+      animation: none;
+    }
+
+    .nav-button:hover{
+      animation: animation 2s infinite linear;
+    }
+
+    .nav-button span {
+        font-size: 2rem;
+    }
+
+    @keyframes animation {
+        50% {
+            color: var(--new-accent);
+            border-color: var(--new-accent);
+        }
+        100% {
+            color:var(--text-gray);
+            border-color:var(--text-gray);
+        }
+    }
+
+    @keyframes border-animation {
+        50% {
+            /* color: var(--new-accent); */
+            border-color: var(--new-accent);
+        }
+        100% {
+            /* color:var(--text-gray); */
+            border-color:var(--text-gray);
+        }
+    }
+</style>
+<!-- <script>
+
+document.addEventListener("astro:page-load", () => {
+    console.log('page load');
+    const sections = document.querySelectorAll("section")
+    const navItems = document.querySelectorAll("nav a")
+    console.log('sectios', sections);
+    console.log('navItems', navItems);
+
+    const callback = (entries: any[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          navItems.forEach((item) => {
+            if (item.getAttribute("aria-label") == entry.target.id) {
+              item.classList.add("active")
+            } else {
+              item.classList.remove("active")
+            }
+          })
+        }
+      })
+    }
+
+    const observer = new IntersectionObserver(callback, {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.3,
+    })
+
+    sections.forEach((section) => {
+      observer.observe(section)
+    })
+
+    // Cleanup function
+    document.onvisibilitychange = () => {
+      if (document.visibilityState === "hidden") {
+        observer.disconnect()
+      } else {
+        sections.forEach((section) => {
+          observer.observe(section)
+        })
+      }
+    }
+
+    navItems.forEach(anchor => {
+      anchor.addEventListener('click', function (this: any,e) {
+          e.preventDefault();
+          console.log('click anchor', e);
+          document.querySelector(this.getAttribute('href')).scrollIntoView({
+              behavior: 'smooth'
+          });
+      });
+    });
+  }, {once: false})
+</script> -->
