@@ -5,6 +5,7 @@ import ScrollCTA from '@/components/ScrollCTA.astro';
 import { getCollection } from "astro:content";
 import NavigationBack from '@/components/NavigationBack.astro';
 import LinkButton from '@/components/LinkButton.astro';
+import { type Props as SEOProps } from 'astro-seo';
 
 interface project {
     title: string;
@@ -46,23 +47,96 @@ function getFormattedDate(input: string) {
 const project = Astro.props;
 const {	Content	} = await project.render();
 const {	data } = project;
+
+let seo: SEOProps = {
+	title:`Detalles ${(data?.title ? ' de '+data?.title : 'del Proyecto')}| Gerardo G.`,
+	description: data.body,
+	openGraph:{
+		basic: {
+			title: `Detalles ${(data?.title ? ' de '+data?.title : 'del Proyecto')}| Gerardo G.`,
+			type: "website",
+			image: "https://user-images.githubusercontent.com/5182256/131216951-8f74f425-f775-463d-a11b-0e01ad9fce8d.png",
+		}
+	},
+	extend:{
+		// link: [{ rel: "icon", href: "/favicon.ico" }],
+		meta: [
+			// {
+			// name: "twitter:image",
+			// content: "https://user-images.githubusercontent.com/5182256/131216951-8f74f425-f775-463d-a11b-0e01ad9fce8d.png",
+			// },
+			// { name: "twitter:title", content: "Tinker Tailor Soldier Spy" },
+			// { name: "twitter:description", content: "Agent" },
+			{ name: "description", content: data?.body },
+		],
+	}
+};
 // console.log('slug',project);
 ---
 
-<Layout title={'Detalles'+(data?.title ? ' de '+data?.title : 'del Proyecto')+" | Gerardo G."}>
+<Layout seo={seo}>
 	<main>
-		<div class="items-center justify-center flex gap-4 flex-col h-[100vh] w-[8rem]">
+		<div class="flex flex-row md:flex-col gap-4 z-[600] items-center justify-center fixed left-0 bottom-0 md:static w-[100vw] h-[6rem] md:h-[100vh] md:w-[8rem]">
 			<NavigationBack icon='arrow_back' tooltip='Todos los proyectos' href='/projects'/>
 			<NavigationBack icon='home' tooltip='Volver al inicio' href='/'/>
 		</div>
 		<div id="block-container" class="container max-w-screen-xl !mx-2.5 md:!mx-20 2xl:!mx-auto">
 			
-			<div class="w-full grid grid-cols-5 gap-[3rem] relative">
+			<div class="w-full md:grid md:grid-cols-5 gap-[3rem] relative">
 				<div class="col-span-3 w-full h-fit text-lg !pb-[3rem]">
 					<h1 class="w-full text-start !py-6 uppercase bg-[--background]">PROYECTO <span class="text-gradient">{data?.title}</span></h1>
+					<div class="flex w-full h-fit md:hidden gap-4 flex-col items-center justify-start">
+						<div class="aspect-video relative rounded-lg w-full border border-[--text-gray] overflow-hidden group flex items-center justify-center">
+							{
+							data?.image ? 
+							<img src={data?.image} alt="" 
+							class="absolute grayscale inset-0 h-full w-full object-cover group-hover:scale-110 group-hover:grayscale-0 transition-transform duration-500 ease-in-out !border-none"/>
+							: 
+							<div class="absolute bg-gray-200 w-full h-full text-[--text] text-lg flex flex-col items-center justify-center">
+								<span class="material-symbols-rounded text-2xl">
+									image
+								</span>
+								<span>Sin imagen</span>
+							</div>
+							}
+						</div>
+						<div class="w-full h-[1px] bg-[--text-gray]"></div>
+						<span class="w-full font-semibold !text-lg">Tecnologías usadas:</span>
+						<div class="w-full flex-none flex flex-wrap gap-2 text-sm items-center justify-start overflow-y-auto overflow-x-hidden">
+							{(data?.technologies)?.map((tech:string) => (
+								<span class="capitalize !px-2 border-[1px] border-[--accent-darker] rounded-full !text-[--accent-darker] flex-none flex items-center justify-center gap-1"> 
+									<i class={"icon icon-"+tech}></i>
+									{tech.replace('-',' ')}
+								</span>
+							))}
+						</div>
+						<span class="w-full font-semibold !text-lg">Roles:</span>
+						<p class="w-full !text-lg">{data?.role}</p>
+						<span class="w-full font-semibold !text-lg">Links:</span>
+						<div class="w-full flex-none flex flex-wrap gap-2 text-sm items-center justify-start overflow-y-auto overflow-x-hidden">
+							{data?.urls.length === 0 ? <span class="!text-lg w-full !text-[--text-gray]">No hay links</span> : ''}
+							{(data?.urls).map(({name, url}:{name: string, url:string}) => (
+							<LinkButton  target="_blank" width="[14rem]" extraClasses="!text-base !py-1" id="linkedinButton" href={url}>
+								{name} 
+								<span class="material-symbols-rounded">
+									captive_portal
+								</span>
+							</LinkButton>
+							))}
+						</div>
+						<span class="w-full font-semibold !text-lg">Fecha:</span>
+						<div class="w-full !text-lg">
+							<!-- <span class="material-symbols-rounded">
+							calendar_month
+							</span> -->
+							{getFormattedDate(data?.startDate)} {data?.endDate !== '' ? '-' : ''} {getFormattedDate(data?.endDate)}
+						</div>
+
+						<span class="w-full font-semibold !text-lg mb-4">Descripción:</span>
+					</div>
 					<Content/>
 				</div>
-				<div class="col-span-2 w-full h-fit flex gap-4 flex-col items-center justify-start friendly-sticky !top-0">
+				<div class="col-span-2 w-full h-fit hidden md:flex gap-4 flex-col items-center justify-start friendly-sticky !top-0">
 					<div class="aspect-video relative rounded-lg w-full border border-[--text-gray] overflow-hidden group flex items-center justify-center">
 						{
 						data?.image ? 
@@ -222,7 +296,7 @@ const {	data } = project;
 		height: 100vh;
 		/* margin: 8rem 0px 0px 0px; */
 		/* padding: 0px 2rem 2rem 2rem; */
-		padding: 8rem 2rem 2rem 2rem;
+		padding: 4rem 2rem 4rem 2rem;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -232,6 +306,12 @@ const {	data } = project;
 		scroll-behavior: smooth;
 		/* border: 1px solid red; */
 		/* background-color: rebeccapurple; */
+	}
+
+	@media (min-width: 768px) { 
+		.container {
+			padding: 6rem 2rem 2rem 2rem;
+		}
 	}
 
 	.container::-webkit-scrollbar {

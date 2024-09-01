@@ -2,23 +2,26 @@
 import { ViewTransitions } from "astro:transitions";
 /* Icomoon for custom icons */
 import '../styles/icomoon/style.css';
+/* SEO */
+import { SEO, type Props as SEOProps } from 'astro-seo';
 
 interface Props {
-	title: string;
+	// title: string;
+	seo?: SEOProps;
 }
 
-const { title } = Astro.props;
+const { seo } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="es">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
+		<!-- <meta name="description" content="Astro description" /> -->
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
+		<!-- <title>{title}</title> -->
 
 		<!-- PRECONNECT -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,7 +31,12 @@ const { title } = Astro.props;
 		<link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&display=swap" rel="stylesheet">
 		<!-- ICONS -->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-
+		<!-- SEO -->
+		<SEO
+		{...seo}
+		title={seo?.title ?? 'Portafolio | Gerardo G.'}
+		description={seo?.description ?? "Portafolio sobre el trabajo de Software realizado por Gerardo G."}
+	  	/>
 		<!-- View Transitions -->
 		<ViewTransitions />
 	</head>
@@ -76,14 +84,23 @@ const { title } = Astro.props;
 	}
 
 	h1 {
-		font-size: 2.25rem;
+		font-size: 1.8rem;
 		/* font-weight: 700; */
 		line-height: 1;
 		text-align: start;
 		margin-top: 0.5rem;
 		margin-bottom: 0.5rem;
 		&.title {
-			font-size: 3rem;
+			font-size: 2.5rem;
+		}
+	}
+
+	@media (min-width: 1024px) { 
+		h1 {
+			font-size: 2.25rem;
+			&.title {
+				font-size: 3rem;
+			}
 		}
 	}
 

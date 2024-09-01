@@ -16,13 +16,13 @@ const { icon, tooltip, href } = Astro.props;
 <nav>
 
     <div class="group flex relative items-center justify-center rounded-full">
-      <a id="experience-button" class="nav-button" href={href} aria-label="experience">
+      <a id="experience-button" class="nav-button bg-[--backgroundRGBA] backdrop-blur-sm supports-[backdrop-filter]:bg-[--backgroundRGBA] transition-all" href={href} aria-label="experience">
         <span class="material-symbols-rounded">
             {icon}
         </span>
       </a>
       
-      <div class="absolute left-0 items-center hidden ml-[4.5rem] group-hover:flex h-fit">
+      <div class="absolute left-0 items-center hidden ml-[4.5rem] group-hover:md:flex h-fit">
         <span class="relative !min-w-fit w-full z-10 p-2 tooltip shadow-lg">
             {tooltip}
         </span>

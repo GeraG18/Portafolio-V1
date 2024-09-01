@@ -9,39 +9,39 @@ const currentPath = Astro.url.pathname;
 
 
     <div class="group flex relative items-center justify-center rounded-full">
-      <a id="home-button" class="nav-button" href="#landing" aria-label="landing">
+      <a id="home-button" class="nav-button bg-[--backgroundRGBA] backdrop-blur-sm supports-[backdrop-filter]:bg-[--backgroundRGBA] transition-all" href="#landing" aria-label="landing">
         <span class="material-symbols-rounded">
             home
         </span>
       </a>
       
-      <div class="absolute left-0 items-center hidden ml-[4.5rem] group-hover:flex h-fit">
+      <div class="absolute left-0 items-center hidden ml-[4.5rem] group-hover:md:flex h-fit">
         <span class="relative !min-w-fit w-full text-sm z-10 p-2 tooltip shadow-lg">
             Inicio
         </span>
       </div>
     </div>
     <div class="group flex relative items-center justify-center rounded-full">
-      <a id="about-button" class="nav-button" href="#about-me" aria-label="about-me">
+      <a id="about-button" class="nav-button bg-[--backgroundRGBA] backdrop-blur-sm supports-[backdrop-filter]:bg-[--backgroundRGBA] transition-all" href="#about-me" aria-label="about-me">
         <span class="material-symbols-rounded">
             person
         </span>
       </a>
       
-      <div class="absolute left-0 items-center hidden ml-[4.5rem] group-hover:flex h-fit">
+      <div class="absolute left-0 items-center hidden ml-[4.5rem] group-hover:md:flex h-fit">
         <span class="relative !min-w-fit w-full z-10 p-2 tooltip shadow-lg">
             Sobre mi
         </span>
       </div>
     </div>
     <div class="group flex relative items-center justify-center rounded-full">
-      <a id="experience-button" class="nav-button" href="#experience" aria-label="experience">
+      <a id="experience-button" class="nav-button bg-[--backgroundRGBA] backdrop-blur-sm supports-[backdrop-filter]:bg-[--backgroundRGBA] transition-all" href="#experience" aria-label="experience">
         <span class="material-symbols-rounded">
             clinical_notes
         </span>
       </a>
       
-      <div class="absolute left-0 items-center hidden ml-[4.5rem] group-hover:flex h-fit">
+      <div class="absolute left-0 items-center hidden ml-[4.5rem] group-hover:md:flex h-fit">
         <span class="relative !min-w-fit w-full z-10 p-2 tooltip shadow-lg">
             Formación
         </span>
@@ -49,13 +49,13 @@ const currentPath = Astro.url.pathname;
     </div>
 
     <div class="group flex relative items-center justify-center rounded-full">
-      <a id="projects-button" class="nav-button" href="#projects" aria-label="projects">
+      <a id="projects-button" class="nav-button bg-[--backgroundRGBA] backdrop-blur-sm supports-[backdrop-filter]:bg-[--backgroundRGBA] transition-all" href="#projects" aria-label="projects">
         <span class="material-symbols-rounded">
             lightbulb
         </span>
       </a>
       
-      <div class="absolute left-0 items-center hidden ml-[4.5rem] group-hover:flex h-fit">
+      <div class="absolute left-0 items-center hidden ml-[4.5rem] group-hover:md:flex h-fit">
         <span class="relative !min-w-fit w-full z-10 p-2 tooltip shadow-lg">
             Últimos trabajos
         </span>
@@ -63,13 +63,13 @@ const currentPath = Astro.url.pathname;
     </div>
       
     <div class="group flex relative items-center justify-center rounded-full">
-      <a id="contact-button" class="nav-button" href="#contact" aria-label="contact">
+      <a id="contact-button" class="nav-button bg-[--backgroundRGBA] backdrop-blur-sm supports-[backdrop-filter]:bg-[--backgroundRGBA] transition-all" href="#contact" aria-label="contact">
           <span class="material-symbols-rounded">
               mail
           </span>
       </a>
       
-      <div class="absolute left-0 items-center hidden ml-[4.5rem] group-hover:flex h-fit">
+      <div class="absolute left-0 items-center hidden ml-[4.5rem] group-hover:md:flex h-fit">
         <span class="relative !min-w-fit w-full z-10 p-2 tooltip shadow-lg">
             Contacto
         </span>
@@ -85,8 +85,15 @@ const currentPath = Astro.url.pathname;
 <style>
     nav {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         gap: 1rem;
+    }
+
+
+    @media (min-width: 768px) {
+      nav {
+        flex-direction: column;
+      }
     }
 
     .tooltip {

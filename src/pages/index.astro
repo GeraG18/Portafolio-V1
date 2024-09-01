@@ -12,27 +12,52 @@ import {experience, studies} from '../env/strings';
 import ScrollCTA from '@/components/ScrollCTA.astro';
 import ProjectsPreview from '@/components/ProjectsPreview.astro';
 import CursorDecorator from '@/components/CursorDecorator.astro';
+import { type Props as SEOProps } from 'astro-seo';
 
 let actualDate: Date = new Date();
+
+let seo: SEOProps = {
+	title:"Portafolio | Gerardo G.",
+	description:"Portafolio sobre el trabajo de Software realizado por Gerardo G.",
+	openGraph:{
+		basic: {
+			title: "Portafolio | Gerardo G.",
+			type: "website",
+			image: "https://user-images.githubusercontent.com/5182256/131216951-8f74f425-f775-463d-a11b-0e01ad9fce8d.png",
+		}
+	},
+	extend:{
+		// link: [{ rel: "icon", href: "/favicon.ico" }],
+		meta: [
+		{ name: "description", content: "Portafolio sobre el trabajo de Software realizado por Gerardo G." },
+			// {
+			// name: "twitter:image",
+			// content: "https://user-images.githubusercontent.com/5182256/131216951-8f74f425-f775-463d-a11b-0e01ad9fce8d.png",
+			// },
+			// { name: "twitter:title", content: "Tinker Tailor Soldier Spy" },
+			// { name: "twitter:description", content: "Agent" },
+		],
+	}
+};
 ---
 
-<Layout title="Portafolio | Gerardo G.">
+<Layout seo={seo}>
 	<main>
 		<!-- https://docs.astro.build/en/guides/deploy/google-firebase/ -->
 		<!-- www.svgrepo.com -->
 		<!-- https://dev.to/ibrahima92/make-a-parallax-effect-with-10-lines-of-javascript-3hia -->
 		<!-- https://rauno.me/ -->
 		 <!-- https://code.juliancataldo.com/component/astro-scroll-observer/#doc -->
-		<div class="items-center justify-center flex flex-col h-[100vh] w-[8rem]">
+		<div class="flex flex-col z-[600] items-center justify-center fixed left-0 bottom-0 md:static w-[100vw] h-[6rem] md:h-[100vh] md:w-[8rem]">
 			<NavigationBar/>
 		</div>
 		<div id="block-container" class="container">
-			<section id="landing" class="flex flex-row gap-1 max-w-screen-xl !mx-2.5 md:!mx-20 2xl:!mx-auto">
+			<section id="landing" class="flex flex-col-reverse md:flex-row gap-1 max-w-screen-xl !mx-2.5 md:!mx-20 2xl:!mx-auto">
 				<div class="w-full h-full flex flex-col justify-center !px-4 items-start">
 					<h1 class="w-full text-start title">HOLA!</h1>
 					<h1 class="w-full text-start title !mb-4">MI NOMBRE ES <span class="text-gradient">GERARDO</span></h1>
 					<p>Desarrollador FullStack Web que tiene como objetivo el desarrollar innovaciones tecnológicas, estar en mejora constante y resolver desafios.</p>
-					<div class="w-full !mt-8 items-start justify-center">
+					<div class="w-full !mt-4 md:!mt-8 flex gap-2 flex-row items-center justify-start">
 						<LinkButton target="_blank" width="[14rem]" id="downloadCVButton" href="/assets/files/cv.pdf">
 							Descargar CV 
 							<DownloadIcon/>
@@ -48,9 +73,9 @@ let actualDate: Date = new Date();
 				</div>
 				<div class="w-full h-full flex items-center justify-center">
 					<!-- //TODO: Cambiar por componente Image -->
-					 <div class="relative flex items-center justify-center h-[80%] max-w-screen-xl">
+					 <div class="relative flex items-center justify-center md:h-[80%] max-w-screen-xl">
 						 <img class="z-5 absolute rounded-full !mb-[4rem]" src="./assets/images/background.svg" alt="Imágen de Ciudad Cyberpunk">
-						 <img class="z-10 image-mask !mt-[4rem]" src="./assets/images/avatar.svg" alt="avatar de Gerardo">
+						 <img class="z-10 h-[38vh] md:h-fit image-mask !mt-[4rem]" src="./assets/images/avatar.svg" alt="avatar de Gerardo">
 					 </div>
 				</div>
 			</section>
@@ -61,7 +86,7 @@ let actualDate: Date = new Date();
 						<p class="w-full">
 							Mi nombre es Gerardo Gallegos Jr. Soy Ingeniero en Sistemas Computacionales enfocado en el desarrollo de Software como Full Stack Developer y actualmente estudiando una maestría 
 							en Ingeniería de Software para ser un mejor profesionista.
-							La pasión por la programación comenzó cuando tenía 10 años, cuando una tía me mostró por primera vez una computadora con Windows XP, quedé fascinado con los programas y todo lo que podía hacer Windows.
+							<!-- La pasión por la programación comenzó cuando tenía 10 años, cuando una tía me mostró por primera vez una computadora con Windows XP, quedé fascinado con los programas y todo lo que podía hacer Windows. -->
 						</p>
 						<p class="w-full">
 							Algunos de mis éxitos son el entrar en clasificación 20 de 140 equipos en programación competitiva nacional, el poder tomar el rol de Administrador de Proyecto y Diseñador de Interfaz Jr en mi trabajo en Córdova Industrial.
@@ -108,7 +133,7 @@ let actualDate: Date = new Date();
 					<h1 class="w-full text-start !mb-12">ÚLTIMOS <span class="text-gradient">TRABAJOS</span></h1>
 					<div class="w-full flex flex-col items-center justify-center gap-8">
 						<ProjectsPreview/>
-						<LinkButton target="_self" width="fit" id="linkedinButton" href="/projects">
+						<LinkButton target="_self" extraClasses="!w-full md:!w-fit" id="linkedinButton" href="/projects">
 							Visualizar todos los proyectos 
 							<span class="material-symbols-rounded">
 								apps
@@ -136,29 +161,29 @@ let actualDate: Date = new Date();
 						<p class="w-full font-semibold text-lg">
 							O también puedes revisar: 
 						</p>
-						<div class="w-full flex items-center justify-start flex-row gap-2">
-							<LinkButton target="_blank" width="[16rem]" id="downloadCVButton" href="/assets/files/cv.pdf">
+						<div class="w-full flex items-center justify-start flex-col md:flex-row gap-2">
+							<LinkButton target="_blank" extraClasses="w-full md:w-auto" width="[16rem]" id="downloadCVButton" href="/assets/files/cv.pdf">
 								Descargar CV 
 								<DownloadIcon/>
 							</LinkButton>
 	
-							<LinkButton target="_blank" width="[16rem]" id="linkedinButton" href="https://www.linkedin.com/in/gerardo-gallegos-jr/">
+							<LinkButton target="_blank" extraClasses="w-full md:w-auto" width="[16rem]" id="linkedinButton" href="https://www.linkedin.com/in/gerardo-gallegos-jr/">
 								LinkedIn 
 								<span class="material-symbols-rounded">
 									send
 								</span>
 							</LinkButton>
 
-							<LinkButton target="_blank" width="[16rem]" id="linkedinButton" href="https://github.com/GeraG18">
+							<LinkButton target="_blank" extraClasses="w-full md:w-auto" width="[16rem]" id="linkedinButton" href="https://github.com/GeraG18">
 								GitHub 
 								<span class="material-symbols-rounded">
 									send
 								</span>
 							</LinkButton>
 						</div>
-						<span class="!mt-8 text-lg">Gerardo Gallegos Jr {actualDate.getFullYear()}©</span>
-						<p class="text-lg text-center max-w-[20rem]">Diseñado en Figma y codificado en VSCode por un servidor. Creado en el Framework Astro, Tailwind y CSS puro.
-							Implementado en $web-hosting. Tipografias Exo y Code Mono.
+						<span class="!text-[--text-gray] !mt-8 text-lg">Gerardo Gallegos Jr {actualDate.getFullYear()}©</span>
+						<p class="text-[--text-gray] text-lg text-center">Diseñado en Figma y codificado en VSCode por un servidor. Creado en el Framework Astro, Tailwind y CSS puro.
+							Implementado en Vercel. Tipografias Exo y Code Mono.
 						</p>
 					</div>
 				</div>
@@ -266,7 +291,7 @@ let actualDate: Date = new Date();
 	.container {
 		width: 100%;
 		height: 100vh;
-		scroll-snap-type: y mandatory;
+		/* scroll-snap-type: y mandatory; */
 		overflow-y: scroll;
 		scroll-behavior: smooth;
 		/* background-color: rebeccapurple; */
@@ -277,12 +302,26 @@ let actualDate: Date = new Date();
 	}
 
 	section {
-		height: 100vh;
+		height: auto;
+		min-height: 100vh;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		scroll-snap-align: start;
 		position: relative;
+		/* border: 1px orange solid;*TODO: Remover despues*/ 
+		padding-bottom: 3rem;
+	}
+
+	@media (min-width: 768px) { 
+		.container {
+			scroll-snap-type: y mandatory;
+		}
+
+		section {
+			height: 100vh;
+			padding-bottom: 0px !important;
+		}
 	}
 
 	/* section::after {

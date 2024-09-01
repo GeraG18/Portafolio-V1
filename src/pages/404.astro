@@ -1,23 +1,47 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import NavigationBack from '@/components/NavigationBack.astro';
+import { type Props as SEOProps } from 'astro-seo';
 
 // let pageRoute = window.location.pathname;
+let seo: SEOProps = {
+	title:`Error 404 | Gerardo G.`,
+	description: `La ruta a la que intentaste acceder no existe :(`,
+	openGraph:{
+		basic: {
+			title: `Error 404 | Gerardo G.`,
+			type: "website",
+			image: "https://user-images.githubusercontent.com/5182256/131216951-8f74f425-f775-463d-a11b-0e01ad9fce8d.png",
+		}
+	},
+	extend:{
+		// link: [{ rel: "icon", href: "/favicon.ico" }],
+		meta: [
+			// {
+			// name: "twitter:image",
+			// content: "https://user-images.githubusercontent.com/5182256/131216951-8f74f425-f775-463d-a11b-0e01ad9fce8d.png",
+			// },
+			// { name: "twitter:title", content: "Tinker Tailor Soldier Spy" },
+			// { name: "twitter:description", content: "Agent" },
+			{ name: "description", content: `La ruta a la que intentaste acceder no existe :(` },
+		],
+	}
+};
 ---
 
-<Layout title="Todos los Proyectos | Gerardo G.">
+<Layout seo={seo}>
 	<main>
-		<div class="items-center justify-center flex flex-col h-[100vh] w-[8rem]">
+		<div class="flex flex-col z-[600] items-center justify-center fixed left-0 bottom-0 md:static w-[100vw] h-[6rem] md:h-[100vh] md:w-[8rem]">
 			<NavigationBack icon='arrow_back' tooltip='Volver a inicio' href='/'/>
 		</div>
 		
-		<div id="block-container" class="container !overflow-x-hidden !overflow-y-auto gap-4">
+		<div id="block-container" class="container !overflow-x-hidden !overflow-y-auto gap-4 max-w-screen-xl !mx-2.5 md:!mx-20 2xl:!mx-auto">
 			
             <h1>:-(</h1>
 			<h1 class="text-start">ERROR <span class="text-gradient">404</span></h1>
             <div class="flex flex-col items-center justify-center">
-                <p>¿De verdad intentaste ir a "<span id="pageRoute"></span>"?</p>
-                <p>Siento decepcionarte, pero aquí no hay nada.</p>
+                <p class="text-center">¿De verdad intentaste ir a "<span id="pageRoute"></span>"?</p>
+                <p class="text-center">Siento decepcionarte, pero aquí no hay nada.</p>
             </div>
 			
 		

@@ -5,6 +5,7 @@ import ScrollCTA from '@/components/ScrollCTA.astro';
 import EmailDecorator from '@/components/EmailDecorator.astro';
 import ScrollNumber from '@/components/ScrollNumber.astro';
 import NavigationBack from '@/components/NavigationBack.astro';
+import { type Props as SEOProps } from 'astro-seo';
 
 const projects = (await getCollection('projects')).map((item: any) => ({...item.data, slug: item.slug}));
 
@@ -20,11 +21,11 @@ function getProjectsWithBentoSizes() {
     let counter = 0;
     let layout = [
 		"col-span-1 row-span-2",
-		"col-span-2 row-span-1",
-		"col-span-2 row-span-2",
-		"col-span-1 row-span-1",
-		"col-span-2 row-span-1",
-		"col-span-1 row-span-2",
+		"col-span-1 row-span-1 md:col-span-2 md:row-span-1",
+		"col-span-1 row-span-1 md:col-span-2 md:row-span-2",
+		"col-span-2 row-span-1 md:col-span-1 md:row-span-1",
+		"col-span-2 row-span-2 md:col-span-2 md:row-span-1",
+		"col-span-1 row-span-1 md:col-span-1 md:row-span-2",
 		"col-span-1 row-span-1",
 		"col-span-2 row-span-1",
 		"col-span-1 row-span-1",
@@ -41,16 +42,16 @@ function getProjectsWithBentoSizes() {
 		"col-span-1 row-span-1",
 		"col-span-2 row-span-1",
 
-		"col-span-1 row-span-1",
-		"col-span-2 row-span-2",
+		"col-span-2 row-span-1 md:col-span-1 md:row-span-1",
+		"col-span-1 row-span-2 md:col-span-2 md:row-span-2",
 		"col-span-1 row-span-2",
-		"col-span-2 row-span-2",
-		"col-span-1 row-span-2",
-		"col-span-2 row-span-2",
-		"col-span-1 row-span-2",
+		"col-span-2 row-span-1 md:col-span-2 md:row-span-2",
+		"col-span-1 row-span-1 md:col-span-1 md:row-span-2",
+		"col-span-1 row-span-1 md:col-span-2 md:row-span-2",
+		"col-span-2 row-span-2 md:col-span-1 md:row-span-2",
 		"col-span-2 row-span-1",
 		"col-span-1 row-span-1",
-		"col-span-2 row-span-1",
+		"col-span-1 row-span-1 md:col-span-2 md:row-span-1",
 	];
 
     // let flag = false;
@@ -98,11 +99,34 @@ function getBetterBentoCardSize(): string {
 	return `col-span-${x} row-span-${y}`;
 }
 
+let seo: SEOProps = {
+	title:"Todos los Proyectos | Gerardo G.",
+	description:"Una lista de todos los proyectos en los que ha participado y/o creado Gerardo.",
+	openGraph:{
+		basic: {
+			title: "Todos los Proyectos | Gerardo G.",
+			type: "website",
+			image: "https://user-images.githubusercontent.com/5182256/131216951-8f74f425-f775-463d-a11b-0e01ad9fce8d.png",
+		}
+	},
+	extend:{
+		// link: [{ rel: "icon", href: "/favicon.ico" }],
+		meta: [
+			{ name: "description", content: "Una lista de todos los proyectos en los que ha participado y/o creado Gerardo." },
+			// {
+			// name: "twitter:image",
+			// content: "https://user-images.githubusercontent.com/5182256/131216951-8f74f425-f775-463d-a11b-0e01ad9fce8d.png",
+			// },
+			// { name: "twitter:title", content: "Tinker Tailor Soldier Spy" },
+			// { name: "twitter:description", content: "Agent" },
+		],
+	}
+};
 ---
 
-<Layout title="Todos los Proyectos | Gerardo G.">
+<Layout seo={seo}>
 	<main>
-		<div class="items-center justify-center flex flex-col h-[100vh] w-[8rem]">
+		<div class="flex flex-col z-[600] items-center justify-center fixed left-0 bottom-0 md:static w-[100vw] h-[6rem] md:h-[100vh] md:w-[8rem]">
 			<NavigationBack icon='arrow_back' tooltip='Volver a inicio' href='/'/>
 		</div>
 		
@@ -121,12 +145,12 @@ function getBetterBentoCardSize(): string {
 				))}
 			</div> -->
 
-			<div class="grid auto-rows-fr w-full h-auto grid-cols-6 gap-4 mt-8 !pb-12">
+			<div class="grid auto-rows-fr w-full h-auto grid-cols-2 md:grid-cols-6 gap-4 mt-8 !pb-14 md:!pb-12">
 				{
-					projectsList?.map(({title, technologies, description, urls, image, startDate, endDate, size, role, slug}) => (
+					projectsList?.map(({title, technologies, description, urls, image, startDate, endDate, size, role, slug}, index) => (
 						<a href={`/projects/${slug}`}  class={size+" rounded-3xl group !overflow-hidden h-full min-h-[12rem] bg-gray-200 flex flex-col gap-2 justify-center items-center text-base relative"}>
 							<p class="two-line-trunc font-semibold text-center h-auto z-10 text-[--text] opacity-0 group-hover:opacity-100 transition-all !px-2">
-								{title}
+								{title} {index+1}
 							</p>
 							<span class="z-10 font-semibold flex items-center justify-center cursor-pointer !text-[--text] opacity-0 group-hover:opacity-100 transition-all">
 								Más detalles
