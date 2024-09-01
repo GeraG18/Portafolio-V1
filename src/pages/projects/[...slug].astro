@@ -44,9 +44,16 @@ function getFormattedDate(input: string) {
 	}
 }
 
-const project = Astro.props;
-const {	Content	} = await project.render();
-const {	data } = project;
+// const project = Astro.props;
+// const {	Content	} = await project.render();
+// const {	data } = project;
+const projects = await getCollection('projects');
+
+const { slug } = Astro.params;
+const project: any = projects.find((page) => page.slug === slug);
+if(!project) return Astro.redirect("/404");
+const { data } = project;
+const { Content } = await project.render();
 
 let seo: SEOProps = {
 	title:`Detalles ${(data?.title ? ' de '+data?.title : 'del Proyecto')}| Gerardo G.`,
