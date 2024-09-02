@@ -9,8 +9,6 @@ import { type Props as SEOProps } from 'astro-seo';
 
 const projects = (await getCollection('projects')).map((item: any) => ({...item.data, slug: item.slug}));
 
-// console.log('project', projects.length)
-
 function filterTechnologies(value: string[]) {
     return [...value.filter((item, index) => (index < 3)), value.length > 3 ? `Y ${value.length - 3} más`: null];
 }
@@ -21,11 +19,11 @@ function getProjectsWithBentoSizes() {
     let counter = 0;
     let layout = [
 		"col-span-1 row-span-2",
-		"col-span-1 row-span-1 md:col-span-2 md:row-span-1",
-		"col-span-1 row-span-1 md:col-span-2 md:row-span-2",
-		"col-span-2 row-span-1 md:col-span-1 md:row-span-1",
-		"col-span-2 row-span-2 md:col-span-2 md:row-span-1",
-		"col-span-1 row-span-1 md:col-span-1 md:row-span-2",
+		"col-span-1 row-span-1 xl:col-span-2 xl:row-span-1",
+		"col-span-1 row-span-1 lg:col-span-2 lg:row-span-1 xl:col-span-2 xl:row-span-2",
+		"col-span-2 row-span-1 xl:col-span-1 xl:row-span-1",
+		"col-span-2 row-span-2 lg:col-span-1 lg:row-span-1 xl:col-span-2 xl:row-span-1",
+		"col-span-1 row-span-1 xl:col-span-1 xl:row-span-2",
 		"col-span-1 row-span-1",
 		"col-span-2 row-span-1",
 		"col-span-1 row-span-1",
@@ -42,28 +40,22 @@ function getProjectsWithBentoSizes() {
 		"col-span-1 row-span-1",
 		"col-span-2 row-span-1",
 
-		"col-span-2 row-span-1 md:col-span-1 md:row-span-1",
-		"col-span-1 row-span-2 md:col-span-2 md:row-span-2",
+		"col-span-2 row-span-1 xl:col-span-1 xl:row-span-1",
+		"col-span-1 row-span-2 xl:col-span-2 xl:row-span-2",
 		"col-span-1 row-span-2",
-		"col-span-2 row-span-1 md:col-span-2 md:row-span-2",
-		"col-span-1 row-span-1 md:col-span-1 md:row-span-2",
-		"col-span-1 row-span-1 md:col-span-2 md:row-span-2",
-		"col-span-2 row-span-2 md:col-span-1 md:row-span-2",
-		"col-span-2 row-span-1",
+		"col-span-2 row-span-1 xl:col-span-2 xl:row-span-2",
+		"col-span-1 row-span-1 xl:col-span-1 xl:row-span-2",
+		"col-span-1 row-span-1 xl:col-span-2 xl:row-span-2",
+		"col-span-2 row-span-2 lg:col-span-2 lg:row-span-1 xl:col-span-1 xl:row-span-2",
+		"col-span-2 row-span-1 ",
 		"col-span-1 row-span-1",
-		"col-span-1 row-span-1 md:col-span-2 md:row-span-1",
+		"col-span-1 row-span-1 xl:col-span-2 xl:row-span-1",
 	];
 
     // let flag = false;
     while(quantity !== projects.length) {
-        // if(counter === 0) flag = true;
-        // if(counter > layout.length - 1){ flag = false; counter --;}
         if(counter > layout.length - 1){ counter = 0;}
 		newArray.push({...projects[quantity], size:layout[counter]})
-        // console.log(`${quantity} ${counter} ${layout[counter]}`)
-        // console.log('flag', flag);
-        // if(flag) counter++
-        // else counter--
         counter++;
         quantity++;
     }
@@ -71,21 +63,6 @@ function getProjectsWithBentoSizes() {
 }
 
 let projectsList = getProjectsWithBentoSizes();
-// function getRandomCardSize(): string {
-// 	let random = randomIntFromInterval(1,4);
-// 	switch(random){
-// 		case 1:
-// 			return 'col-span-1 row-span-1 !h-[12rem] !w-[12rem]'
-// 		case 2:
-// 			return 'col-span-1 row-span-2 !h-[12rem] !w-[24rem]'
-// 		case 3:
-// 			return 'col-span-2 row-span-1 !h-[24rem] !w-[12rem]'
-// 		case 4:
-// 			return 'col-span-2 row-span-2 !h-[24rem] !w-[24rem]'
-// 		default:
-// 			return 'col-span-1 row-span-1 !h-[12rem] !w-[12rem]'
-// 	}
-// }
 
 function randomIntFromInterval(min: number, max:number):number { // min and max included 
 	return Math.floor(Math.random() * (max - min + 1) + min);
@@ -110,15 +87,8 @@ let seo: SEOProps = {
 		}
 	},
 	extend:{
-		// link: [{ rel: "icon", href: "/favicon.ico" }],
 		meta: [
 			{ name: "description", content: "Una lista de todos los proyectos en los que ha participado y/o creado Gerardo." },
-			// {
-			// name: "twitter:image",
-			// content: "https://user-images.githubusercontent.com/5182256/131216951-8f74f425-f775-463d-a11b-0e01ad9fce8d.png",
-			// },
-			// { name: "twitter:title", content: "Tinker Tailor Soldier Spy" },
-			// { name: "twitter:description", content: "Agent" },
 		],
 	}
 };
@@ -134,23 +104,12 @@ let seo: SEOProps = {
 			
 			<h1 class="w-full text-start !my-6">TODOS LOS <span class="text-gradient">PROYECTOS</span></h1>
 
-			<!-- GRID GENERATOR -->
-			<!-- <div class="grid auto-rows-fr w-full h-auto grid-cols-6 gap-4">
-				{[1,2,3,4,5,6,7,8,9,10].map((item) => (
-					<a href={`#`}  class={getBetterBentoCardSize()+" rounded-3xl group !overflow-hidden h-full min-h-[12rem] bg-gray-200 flex flex-col gap-2 justify-center items-center text-base relative text-center font-bold"}>
-						<p class="w-full truncate">
-							{item}
-						</p>
-					</a>
-				))}
-			</div> -->
-
-			<div class="grid auto-rows-fr w-full h-auto grid-cols-2 md:grid-cols-6 gap-4 mt-8 !pb-14 md:!pb-12">
+			<div class="grid auto-rows-fr w-full h-auto grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-4 mt-8 !pb-14 md:!pb-12">
 				{
 					projectsList?.map(({title, technologies, description, urls, image, startDate, endDate, size, role, slug}, index) => (
 						<a href={`/projects/${slug}`}  class={size+" rounded-3xl group !overflow-hidden h-full min-h-[12rem] bg-gray-200 flex flex-col gap-2 justify-center items-center text-base relative"}>
 							<p class="two-line-trunc font-semibold text-center h-auto z-10 text-[--text] opacity-0 group-hover:opacity-100 transition-all !px-2">
-								{title} {index+1}
+								{title} {/* {index+1} */}
 							</p>
 							<span class="z-10 font-semibold flex items-center justify-center cursor-pointer !text-[--text] opacity-0 group-hover:opacity-100 transition-all">
 								Más detalles

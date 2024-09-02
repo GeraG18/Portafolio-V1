@@ -6,8 +6,6 @@ const currentPath = Astro.url.pathname;
 ---
 <!-- (href !== '' && Astro.url.pathname.startsWith(href)) -->
 <nav>
-
-
     <div class="group flex relative items-center justify-center rounded-full">
       <a id="home-button" class="nav-button bg-[--backgroundRGBA] backdrop-blur-sm supports-[backdrop-filter]:bg-[--backgroundRGBA] transition-all" href="#landing" aria-label="landing">
         <span class="material-symbols-rounded">
@@ -15,7 +13,7 @@ const currentPath = Astro.url.pathname;
         </span>
       </a>
       
-      <div class="absolute left-0 items-center hidden ml-[4.5rem] group-hover:md:flex h-fit">
+      <div class="absolute left-0 items-center hidden ml-[4.5rem] group-hover:xl:flex h-fit">
         <span class="relative !min-w-fit w-full text-sm z-10 p-2 tooltip shadow-lg">
             Inicio
         </span>
@@ -28,7 +26,7 @@ const currentPath = Astro.url.pathname;
         </span>
       </a>
       
-      <div class="absolute left-0 items-center hidden ml-[4.5rem] group-hover:md:flex h-fit">
+      <div class="absolute left-0 items-center hidden ml-[4.5rem] group-hover:xl:flex h-fit">
         <span class="relative !min-w-fit w-full z-10 p-2 tooltip shadow-lg">
             Sobre mi
         </span>
@@ -41,7 +39,7 @@ const currentPath = Astro.url.pathname;
         </span>
       </a>
       
-      <div class="absolute left-0 items-center hidden ml-[4.5rem] group-hover:md:flex h-fit">
+      <div class="absolute left-0 items-center hidden ml-[4.5rem] group-hover:xl:flex h-fit">
         <span class="relative !min-w-fit w-full z-10 p-2 tooltip shadow-lg">
             Formación
         </span>
@@ -55,7 +53,7 @@ const currentPath = Astro.url.pathname;
         </span>
       </a>
       
-      <div class="absolute left-0 items-center hidden ml-[4.5rem] group-hover:md:flex h-fit">
+      <div class="absolute left-0 items-center hidden ml-[4.5rem] group-hover:xl:flex h-fit">
         <span class="relative !min-w-fit w-full z-10 p-2 tooltip shadow-lg">
             Últimos trabajos
         </span>
@@ -69,7 +67,7 @@ const currentPath = Astro.url.pathname;
           </span>
       </a>
       
-      <div class="absolute left-0 items-center hidden ml-[4.5rem] group-hover:md:flex h-fit">
+      <div class="absolute left-0 items-center hidden ml-[4.5rem] group-hover:xl:flex h-fit">
         <span class="relative !min-w-fit w-full z-10 p-2 tooltip shadow-lg">
             Contacto
         </span>
@@ -218,7 +216,8 @@ document.addEventListener("astro:page-load", () => {
       navItems.forEach(anchor => {
         anchor.addEventListener('click', function (this: any,e) {
             e.preventDefault();
-            console.log('click anchor', e);
+            console.log('click anchor', this.getAttribute('href'));
+            console.log('anchor', this);
             document.querySelector(this.getAttribute('href')).scrollIntoView({
                 behavior: 'smooth'
             });

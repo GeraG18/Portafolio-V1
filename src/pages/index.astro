@@ -52,7 +52,7 @@ let seo: SEOProps = {
 			<NavigationBar/>
 		</div>
 		<div id="block-container" class="container">
-			<section id="landing" class="flex flex-col-reverse md:flex-row gap-1 max-w-screen-xl !mx-2.5 md:!mx-20 2xl:!mx-auto">
+			<section id="landing" class="flex flex-col-reverse xl:flex-row gap-1 max-w-screen-xl !mx-2.5 md:!mx-20 2xl:!mx-auto">
 				<div class="w-full h-full flex flex-col justify-center !px-4 items-start">
 					<h1 class="w-full text-start title">HOLA!</h1>
 					<h1 class="w-full text-start title !mb-4">MI NOMBRE ES <span class="text-gradient">GERARDO</span></h1>
@@ -133,7 +133,7 @@ let seo: SEOProps = {
 					<h1 class="w-full text-start !mb-12">ÚLTIMOS <span class="text-gradient">TRABAJOS</span></h1>
 					<div class="w-full flex flex-col items-center justify-center gap-8">
 						<ProjectsPreview/>
-						<LinkButton target="_self" extraClasses="!w-full md:!w-fit" id="linkedinButton" href="/projects">
+						<LinkButton target="_self" extraClasses="!w-full lg:!w-fit" id="linkedinButton" href="/projects">
 							Visualizar todos los proyectos 
 							<span class="material-symbols-rounded">
 								apps
@@ -161,20 +161,20 @@ let seo: SEOProps = {
 						<p class="w-full font-semibold text-lg">
 							O también puedes revisar: 
 						</p>
-						<div class="w-full flex items-center justify-start flex-col md:flex-row gap-2">
-							<LinkButton target="_blank" extraClasses="w-full md:w-auto" width="[16rem]" id="downloadCVButton" href="/assets/files/cv.pdf">
+						<div class="w-full flex items-center justify-start flex-col lg:flex-row gap-2">
+							<LinkButton target="_blank" extraClasses="w-full lg:w-auto" width="[16rem]" id="downloadCVButton" href="/assets/files/cv.pdf">
 								Descargar CV 
 								<DownloadIcon/>
 							</LinkButton>
 	
-							<LinkButton target="_blank" extraClasses="w-full md:w-auto" width="[16rem]" id="linkedinButton" href="https://www.linkedin.com/in/gerardo-gallegos-jr/">
+							<LinkButton target="_blank" extraClasses="w-full lg:w-auto" width="[16rem]" id="linkedinButton" href="https://www.linkedin.com/in/gerardo-gallegos-jr/">
 								LinkedIn 
 								<span class="material-symbols-rounded">
 									send
 								</span>
 							</LinkButton>
 
-							<LinkButton target="_blank" extraClasses="w-full md:w-auto" width="[16rem]" id="linkedinButton" href="https://github.com/GeraG18">
+							<LinkButton target="_blank" extraClasses="w-full lg:w-auto" width="[16rem]" id="linkedinButton" href="https://github.com/GeraG18">
 								GitHub 
 								<span class="material-symbols-rounded">
 									send
@@ -313,7 +313,7 @@ let seo: SEOProps = {
 		padding-bottom: 3rem;
 	}
 
-	@media (min-width: 768px) { 
+	@media (min-width: 1024px) { 
 		.container {
 			scroll-snap-type: y mandatory;
 		}

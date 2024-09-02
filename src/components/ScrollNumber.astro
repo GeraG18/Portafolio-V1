@@ -10,7 +10,7 @@
         <div class="bar"></div>
     </div>
 
-    <span id="scroll-span-inner" class="kode-mono !text-2xl text-[--text-gray]"></span>
+    <span id="scroll-span-inner" class="kode-mono !text-2xl text-[--text-gray]">--</span>
 
     <div id="down-scroll-button" class="scroll-bar">
         <div class="bar"></div>
@@ -18,6 +18,25 @@
             keyboard_arrow_down
         </span>
     </div>
+
+    <span>
+        <a id="home-button" class="hidden" href="#landing" aria-label="landing">
+            landing
+        </a>
+        <a id="about-button" class="hidden" href="#about-me" aria-label="about-me">
+            about-me
+        </a>
+        <a id="experience-button" class="hidden" href="#experience" aria-label="experience">
+            experience
+        </a>
+        <a id="work-button" class="hidden" href="#work" aria-label="work">
+            work
+        </a>
+        <a id="contact-button" class="hidden" href="#contact" aria-label="contact">
+            contact
+        </a>
+    </span>
+  
 </div>
 
 <style>
@@ -53,65 +72,97 @@
 </style>
 
 <script>
+import { navigate } from "astro:transitions/client";
+
     document.addEventListener("astro:page-load", () => {
 
         /* number */
-        let viewWidth: number = window.innerWidth;
-        let viewHeight: number = window.innerHeight;
-        let lastScrollPosition: number  = 0;
         let pageCounter: number = 1;
-    
+
+        /* array */
+        let anchorIds = [
+            "home-button",
+            "about-button",
+            "experience-button",
+            "work-button",
+            "contact-button",
+        ];
+       
         /* HTMLElement */
-        let blocksBody: HTMLElement | null = document.getElementById('block-container');
         let span: HTMLElement | null = document.getElementById('scroll-span-inner');
         let upButton: HTMLElement | null = document.getElementById('up-scroll-button');
         let downButton: HTMLElement | null = document.getElementById('down-scroll-button');
-    
+        const sections = document.querySelectorAll("section")
+        const navItems = document.querySelectorAll("span a");
+        
         /* Init Zone */
         span !== null ? span.innerText = pageCounter.toLocaleString('es-MX', {minimumIntegerDigits: 2,useGrouping: false}) : null;
     
-        blocksBody !== null ? 
-        blocksBody.addEventListener("scroll", (event) => {
-            let actualScrollPosition: number = blocksBody.scrollTop;
-
-            switch (actualScrollPosition) {
-                case viewHeight*0:
-                    pageCounter = 1;
-                    break;
-    
-                case viewHeight*1:
-                    pageCounter = 2;
-                    break;
-                case viewHeight*2:
-                    pageCounter = 3;
-                    break;
-                case viewHeight*3:
-                    pageCounter = 4;
-                    break;
-                case viewHeight*4:
-                    pageCounter = 5;
-                    break;
-                default:
-                    break;
-            }
-    
-            span !== null ? span.innerText = pageCounter.toLocaleString('es-MX', {minimumIntegerDigits: 2,useGrouping: false}) : null;
-        })
-        : null;
-    
         upButton !== null ? 
         upButton.addEventListener("click", (event) => {
-            blocksBody !== null ? blocksBody.scrollTo(0,blocksBody.scrollTop - viewHeight) : null;
+            if(pageCounter !== 1) pageCounter --;
+            clickElement(pageCounter - 1);
+            span !== null ? span.innerText = pageCounter.toLocaleString('es-MX', {minimumIntegerDigits: 2,useGrouping: false}) : null;
         })
         : null;
     
         downButton !== null ? 
         downButton.addEventListener("click", (event) => {
-            blocksBody !== null ? blocksBody.scrollTo(0,blocksBody.scrollTop + viewHeight) : null;
+            if(pageCounter !== 5) pageCounter ++;
+            clickElement(pageCounter - 1);
+            span !== null ? span.innerText = pageCounter.toLocaleString('es-MX', {minimumIntegerDigits: 2,useGrouping: false}) : null;
         })
         : null;
+
+        navItems.forEach(anchor => {
+            anchor.addEventListener('click', function (this: any,e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
     
         /* Functions Zone */
-    })
+        const clickElement = (index:number) => {
+            let element = document.getElementById(anchorIds[index]);
+            element ? element.click() : null;
+        };
+
+        const callback = (entries: any[]) => {
+            entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                let index = anchorIds.findIndex((anchorId) => {
+                    let htmlElement = document.getElementById(anchorId);
+                    let atrribute: any = htmlElement ? htmlElement.getAttribute("aria-label"): '';
+                    return atrribute.includes(entry.target.id);
+                });
+                if(index !== -1) pageCounter = index+1;
+                span !== null ? span.innerText = pageCounter.toLocaleString('es-MX', {minimumIntegerDigits: 2,useGrouping: false}) : null;
+            }
+            })
+        }
+    
+        const observer = new IntersectionObserver(callback, {
+            root: null,
+            rootMargin: "0px",
+            threshold: 0.3,
+        })
+    
+        sections.forEach((section) => {
+            observer.observe(section)
+        })
+    
+        // Cleanup function
+        document.onvisibilitychange = () => {
+            if (document.visibilityState === "hidden") {
+            observer.disconnect()
+            } else {
+            sections.forEach((section) => {
+                observer.observe(section)
+            })
+            }
+        }
+    });
  
 </script>

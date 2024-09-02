@@ -54,7 +54,8 @@ const projects = await getCollection('projects');
 const { slug } = Astro.params;
 const project: any = projects.find((page) => page.slug === slug);
 if(!project) return Astro.redirect("/404");
-const { data } = project.map((item: any) => ({...item.data, slug: item.slug, body: textProccesor(item.body)}));
+// const { data } = project.map((item: any) => ());
+const data = {...project.data, slug: project.slug, body: textProccesor(project.body)}
 const { Content } = await project.render();
 console.log('slug', data)
 let seo: SEOProps = {
@@ -91,10 +92,10 @@ let seo: SEOProps = {
 		</div>
 		<div id="block-container" class="container max-w-screen-xl !mx-2.5 md:!mx-20 2xl:!mx-auto">
 			
-			<div class="w-full md:grid md:grid-cols-5 gap-[3rem] relative">
+			<div class="w-full xl:grid xl:grid-cols-5 gap-[3rem] relative">
 				<div class="col-span-3 w-full h-fit text-lg !pb-[3rem]">
 					<h1 class="w-full text-start !py-6 uppercase bg-[--background]">PROYECTO <span class="text-gradient">{data?.title}</span></h1>
-					<div class="flex w-full h-fit md:hidden gap-4 flex-col items-center justify-start">
+					<div class="flex w-full h-fit xl:hidden gap-4 flex-col items-center justify-start">
 						<div class="aspect-video relative rounded-lg w-full border border-[--text-gray] overflow-hidden group flex items-center justify-center">
 							{
 							data?.image ? 
@@ -145,7 +146,7 @@ let seo: SEOProps = {
 					</div>
 					<Content/>
 				</div>
-				<div class="col-span-2 w-full h-fit hidden md:flex gap-4 flex-col items-center justify-start friendly-sticky !top-0">
+				<div class="col-span-2 w-full h-fit hidden xl:flex gap-4 flex-col items-center justify-start friendly-sticky !top-0">
 					<div class="aspect-video relative rounded-lg w-full border border-[--text-gray] overflow-hidden group flex items-center justify-center">
 						{
 						data?.image ? 
