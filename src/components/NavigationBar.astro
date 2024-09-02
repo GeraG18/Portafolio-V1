@@ -19,6 +19,7 @@ const currentPath = Astro.url.pathname;
         </span>
       </div>
     </div>
+    
     <div class="group flex relative items-center justify-center rounded-full">
       <a id="about-button" class="nav-button bg-[--backgroundRGBA] backdrop-blur-sm supports-[backdrop-filter]:bg-[--backgroundRGBA] transition-all" href="#about-me" aria-label="about-me">
         <span class="material-symbols-rounded">
@@ -32,6 +33,7 @@ const currentPath = Astro.url.pathname;
         </span>
       </div>
     </div>
+
     <div class="group flex relative items-center justify-center rounded-full">
       <a id="experience-button" class="nav-button bg-[--backgroundRGBA] backdrop-blur-sm supports-[backdrop-filter]:bg-[--backgroundRGBA] transition-all" href="#experience" aria-label="experience">
         <span class="material-symbols-rounded">
@@ -173,9 +175,9 @@ document.addEventListener("astro:page-load", () => {
     console.log('page load', window.location.pathname);
     if( window.location.pathname === '/') {
 
-      const sections = document.querySelectorAll("section")
+      const sections = document.querySelectorAll("#block-container section")
       const navItems = document.querySelectorAll("nav a")
-      console.log('sectios', sections);
+      console.log('#block-container sections', sections);
       console.log('navItems', navItems);
   
       const callback = (entries: any[]) => {
@@ -216,11 +218,14 @@ document.addEventListener("astro:page-load", () => {
       navItems.forEach(anchor => {
         anchor.addEventListener('click', function (this: any,e) {
             e.preventDefault();
-            console.log('click anchor', this.getAttribute('href'));
-            console.log('anchor', this);
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
+            console.log('sectionId id', this.getAttribute('href'));
+            
+            let test = document.querySelector(this.getAttribute('href')).scrollIntoView({
                 behavior: 'smooth'
             });
+
+            console.log('test', test);
+            
         });
       });
     }
