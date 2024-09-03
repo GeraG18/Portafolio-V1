@@ -61,7 +61,7 @@ export const studies: timeline[] = [
     {
         title: `Full Stack Developer (Empleado)`,
         startDate: '2022',
-        endDate: 'ACTUALIDAD',
+        endDate: 'PRESENTE',
         description: 'Córdova Industrial Integradores<br>Aportaciones: Desarrollé y desplegué 5 aplicaciones hechas en Ionic a la Appstore, he aportado en a mejora de proyectos existentes, desarrollé y desplegué 4 páginas web, aporté al diseño de UX/UI de las aplicaciones y páginas web.'
     },
     {
