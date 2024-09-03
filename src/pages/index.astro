@@ -48,15 +48,15 @@ let seo: SEOProps = {
 		<!-- https://dev.to/ibrahima92/make-a-parallax-effect-with-10-lines-of-javascript-3hia -->
 		<!-- https://rauno.me/ -->
 		 <!-- https://code.juliancataldo.com/component/astro-scroll-observer/#doc -->
-		<div class="flex flex-col z-[600] items-center justify-center fixed left-0 bottom-0 md:static w-[100vw] h-[6rem] md:h-[100vh] md:w-[8rem]">
+		<div class="hidden md:flex flex-col z-[600] items-center justify-center fixed left-0 bottom-0 md:static w-[100vw] h-[6rem] md:h-[100vh] md:w-[8rem]">
 			<NavigationBar/>
 		</div>
 		<div id="block-container" class="container">
 			<section id="landing" class="flex flex-col-reverse xl:flex-row gap-1 max-w-screen-xl !mx-2.5 md:!mx-20 2xl:!mx-auto">
-				<div class="w-full h-full flex flex-col justify-center !px-4 items-start">
+				<div class="w-full h-full flex flex-col justify-center !px-4 !pb-4 md:!pb-0 items-start">
 					<h1 class="w-full text-start title">HOLA!</h1>
 					<h1 class="w-full text-start title !mb-4">MI NOMBRE ES <span class="text-gradient">GERARDO</span></h1>
-					<p>Desarrollador FullStack Web que tiene como objetivo el desarrollar innovaciones tecnológicas, estar en mejora constante y resolver desafios.</p>
+					<p>Desarrollador FullStack Web con 2 años de experiencia que tiene como objetivo el desarrollar innovaciones tecnológicas, estar en mejora constante y resolver desafios.</p>
 					<div class="w-full !mt-4 md:!mt-8 flex gap-2 flex-row items-center justify-start">
 						<LinkButton target="_blank" width="[14rem]" id="downloadCVButton" href="/assets/files/cv.pdf">
 							Descargar CV 
@@ -71,7 +71,7 @@ let seo: SEOProps = {
 						</LinkButton>
 					</div>
 				</div>
-				<div class="w-full h-full flex items-center justify-center">
+				<div class="w-full h-full flex items-center justify-center !px-4 !py-4 md:!py-0">
 					<!-- //TODO: Cambiar por componente Image -->
 					 <div class="relative flex items-center justify-center md:h-[80%] max-w-screen-xl">
 						 <img class="z-5 absolute rounded-full !mb-[4rem]" src="./assets/images/background.svg" alt="Imágen de Ciudad Cyberpunk">
@@ -80,8 +80,8 @@ let seo: SEOProps = {
 				</div>
 			</section>
 			<section id="about-me" class="flex flex-col items-center justify-center max-w-screen-xl !mx-2.5 md:!mx-20 2xl:!mx-auto">
-				<div class="w-full h-fit flex flex-col justify-start !px-4 !py-12 items-center">
-					<h1 class="w-full text-start !mb-12">SOBRE <span class="text-gradient">MI</span></h1>
+				<div class="w-full h-fit flex flex-col justify-start !px-4 !py-8 md:!py-12 items-center">
+					<h1 class="w-full bg-[--titleRGBA] backdrop-blur-sm supports-[backdrop-filter]:bg-[--titleRGBA] transition-all sticky top-0 md:static text-start !py-5">SOBRE <span class="text-gradient">MI</span></h1>
 					<div class="w-full flex flex-col items-center justify-center gap-4">
 						<p class="w-full">
 							Mi nombre es Gerardo Gallegos Jr. Soy Ingeniero en Sistemas Computacionales enfocado en el desarrollo de Software como Full Stack Developer y actualmente estudiando una maestría 
@@ -89,7 +89,7 @@ let seo: SEOProps = {
 							<!-- La pasión por la programación comenzó cuando tenía 10 años, cuando una tía me mostró por primera vez una computadora con Windows XP, quedé fascinado con los programas y todo lo que podía hacer Windows. -->
 						</p>
 						<p class="w-full">
-							Algunos de mis éxitos son el entrar en clasificación 20 de 140 equipos en programación competitiva nacional, el poder tomar el rol de Administrador de Proyecto y Diseñador de Interfaz Jr en mi trabajo en Córdova Industrial.
+							Algunos de mis éxitos son el entrar en clasificación 20 de 140 equipos en programación competitiva nacional, el poder tomar el rol de Administrador de Proyecto y Diseñador de Interfaz Jr en la empresa Córdova Industrial.
 						</p>
 						<p class="w-full">
 							Mi objetivo es el mejorar de forma constante, aprender de todos mis errores y siempre resolver los desafíos complejos que requieren una solución complicada de entender. 
@@ -98,7 +98,7 @@ let seo: SEOProps = {
 					</div>
 				</div>
 				<!-- <div class="w-full h-fit flex flex-col justify-start !px-4 !py-12 items-center">
-					<h1 class="w-full text-start !mb-12">RANDOM <span class="text-gradient">FACTS</span></h1>
+					<h1 class="w-full text-start !py-5">RANDOM <span class="text-gradient">FACTS</span></h1>
 					<div class="w-full flex flex-col items-center justify-center gap-4">
 						<p class="w-full">
 							Me gustan mucho los videojuegos desde niño (pero siempre Team Nintendo).
@@ -114,8 +114,8 @@ let seo: SEOProps = {
 			</section>
 		
 			<section id="experience" class="flex flex-col items-center justify-center max-w-screen-xl !mx-2.5 md:!mx-20 2xl:!mx-auto">
-				<div class="w-full h-fit flex flex-col justify-start !px-4 !py-12 items-center">
-					<h1 class="w-full text-start !mb-12">MI <span class="text-gradient">FORMACIÓN</span></h1>
+				<div class="w-full h-fit flex flex-col justify-start !px-4 !py-8 md:!py-12 items-center">
+					<h1 class="w-full z-[40] bg-[--titleRGBA] backdrop-blur-sm supports-[backdrop-filter]:bg-[--titleRGBA] transition-all sticky top-0 md:static text-start !py-5">MI <span class="text-gradient">FORMACIÓN</span></h1>
 					<div class="w-full flex flex-col items-center justify-center gap-4">
 						<Timeline timelineList={studies}/>
 					</div>
@@ -123,8 +123,8 @@ let seo: SEOProps = {
 			</section>
 
 			<section id="work" class="flex flex-col items-center justify-center max-w-screen-xl !mx-2.5 md:!mx-20 2xl:!mx-auto">
-				<div class="w-full h-fit flex flex-col justify-start !px-4 !py-12 items-center">
-					<h1 class="w-full text-start !mb-12">ÚLTIMOS <span class="text-gradient">TRABAJOS</span></h1>
+				<div class="w-full h-fit flex flex-col justify-start !px-4 !py-8 md:!py-12 items-center">
+					<h1 class="w-full z-[40] bg-[--titleRGBA] backdrop-blur-sm supports-[backdrop-filter]:bg-[--titleRGBA] transition-all sticky top-0 md:static text-start !py-5">ÚLTIMOS <span class="text-gradient">TRABAJOS</span></h1>
 					<div class="w-full flex flex-col items-center justify-center gap-8">
 						<ProjectsPreview/>
 						<LinkButton target="_self" extraClasses="!w-full lg:!w-fit" id="linkedinButton" href="/projects">
@@ -138,11 +138,11 @@ let seo: SEOProps = {
 			</section>
 
 			<section id="contact" class="card5 max-w-screen-xl !mx-2.5 md:!mx-20 2xl:!mx-auto">
-				<div class="w-full h-fit flex flex-col justify-start !px-4 !py-12 items-center">
-					<h1 class="w-full text-start !mb-12">NO OLVIDES <span class="text-gradient">CONTACTARME</span></h1>
-					<div class="w-full flex flex-col items-center justify-center gap-4">
+				<div class="w-full h-fit flex flex-col justify-start !px-4 !py-8 md:!py-12 items-center">
+					<h1 class="w-full z-[40] bg-[--titleRGBA] backdrop-blur-sm supports-[backdrop-filter]:bg-[--titleRGBA] transition-all sticky top-0 md:static text-start !py-5 !mb-4">NO OLVIDES <span class="text-gradient">CONTACTARME</span></h1>
+					<div class="w-full flex flex-col items-center justify-center gap-4 !mb-10 md:!mb-0">
 						<p class="w-full text-lg">
-							Si te gusta mi trabajo realizado y quieres discutir al respecto, o tienes alguna oferta de trabajo que realizarme, no dudes en contactarme!
+							Si le gustó mi trabajo realizado y quiere discutir al respecto o tiene alguna oferta de trabajo que realizarme, no dude en contactarme!
 						</p>
 						<p class="w-full text-lg">
 							Muchas gracias!
@@ -286,6 +286,7 @@ let seo: SEOProps = {
 	.container {
 		width: 100%;
 		height: 100vh;
+		position: relative;
 		/* scroll-snap-type: y mandatory; */
 		overflow-y: scroll;
 		scroll-behavior: smooth;
@@ -298,14 +299,21 @@ let seo: SEOProps = {
 
 	section {
 		height: auto;
-		min-height: 100vh;
+		/* min-height: 100vh; */
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		scroll-snap-align: start;
 		position: relative;
 		/* border: 1px orange solid;*TODO: Remover despues*/ 
-		padding-bottom: 3rem;
+		/* padding-top: 3rem; */
+		/* padding-bottom: 3rem; */
+	}
+
+	@media (min-width: 768px) { 
+		section {
+			min-height: 100vh;
+		}
 	}
 
 	@media (min-width: 1024px) { 
@@ -316,6 +324,7 @@ let seo: SEOProps = {
 		section {
 			height: 100vh;
 			padding-bottom: 0px !important;
+			padding-top: 0px !important;
 		}
 	}
 

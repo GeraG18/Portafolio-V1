@@ -37,9 +37,9 @@ let buttonStyle = `
 `;
 
 ---
-<div class="w-full flex flex-col items-center justify-center !gap-4">
+<div class="w-full flex flex-col items-center justify-center !gap-4 group">
     {lastProjects?.map(({title, technologies, urls, image, startDate, endDate, role, slug, body}) => (
-        <div class="flex-none w-full h-full lg:h-[10rem] flex flex-col lg:flex-row gap-2 items-center justify-center">
+        <div class="flex-none w-full h-full lg:h-[10rem] flex flex-col lg:flex-row gap-2 md:items-center justify-center">
             <div class="aspect-video relative rounded-lg h-[10rem] lg:h-full border border-[--text-gray] overflow-hidden group flex items-center justify-center">
                 {/* <p class="two-line-trunc h-auto z-10 text-[--text] opacity-0 group-hover:opacity-100 transition-all !px-2">
                     {title}
@@ -103,6 +103,8 @@ let buttonStyle = `
                 </div>
             </div>
         </div>
+
+        <div class="w-full h-[1px] bg-[--text-gray] last:!hidden lg:hidden"></div>
     ))}
 
 </div>
