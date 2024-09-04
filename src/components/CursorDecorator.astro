@@ -1,17 +1,22 @@
 ---
 
 ---
-<div class="main">
-    <div class="ball z-[-10] hidden lg:flex" id='mouseBall'></div><!-- MOUSE -->
-</div>
+<div class="pointer-events-none opacity-0 lg:opacity-100 fixed inset-0 z-50 transition duration-300 lg:absolute" id="radialCursor"></div>
 
 <script>
     document.addEventListener("astro:page-load", () => {
+		/* number */
+		let x, y = 0;
+
+		/* htmlElement */
         let root = document.documentElement;
     
-        root.addEventListener("mousemove", e => {
-            root.style.setProperty('--mouse-x', e.clientX + "px");
-            root.style.setProperty('--mouse-y', e.clientY + "px");
+        root.addEventListener("mousemove", (e: MouseEvent) => {
+            x = e.clientX;
+			y = e.clientY; 
+			
+			let decorator = document.getElementById('radialCursor');
+			decorator ? decorator.style.background = `radial-gradient(600px at ${x}px ${y}px, var(--accent-radial), transparent 80%)` : null;
         });
     });
 </script>
@@ -27,21 +32,17 @@
         height: 100%;
     }
 
-    #mouseBall {
-        left: var(--mouse-x);
-        top: var(--mouse-y);
-    }
-
     .ball {
-		width: 50px;
-		height: 50px;
-		background: linear-gradient(158.63deg,#2F70AF 5.25%,#806491 28.3%,#0F7EEB 108.22%);
+		width: 200px;
+		height: 200px;
+		/* background: linear-gradient(158.63deg,#2F70AF 5.25%,#806491 28.3%,#0F7EEB 108.22%); */
+		background: var(--text-gray-40);
 		filter: blur(15px);
 		border-radius: 100%;
 		position: fixed;
 		pointer-events: none;
 		transform: translate(-50%,-50%);
-		z-index: 5;
+		z-index: 55;
 		overflow: hidden;
 		opacity: .7;
 	}
