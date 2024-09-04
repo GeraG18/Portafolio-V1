@@ -6,6 +6,7 @@ import { getCollection } from "astro:content";
 import NavigationBack from '@/components/NavigationBack.astro';
 import LinkButton from '@/components/LinkButton.astro';
 import { type Props as SEOProps } from 'astro-seo';
+import { Image } from 'astro:assets';
 
 interface project {
     title: string;
@@ -110,7 +111,36 @@ let seo: SEOProps = {
 							</div>
 							}
 						</div>
-						<div class="w-full h-[1px] bg-[--text-gray]"></div>
+						<div class="w-full h-[1px] bg-[--text-gray-40]"></div>
+						<span class="w-full font-semibold !text-lg">Estado del proyecto:</span>
+						{/* published, in-progress, hold, inactive */}
+						<div class="w-full flex-none flex flex-wrap gap-2 text-sm items-center justify-start overflow-y-auto overflow-x-hidden">
+							{
+								data?.status === 'published' ?
+								<div class="inline-flex items-center justify-center gap-2 !px-3 py-2 space-x-2 bg-[--published] transition focus-visible:ring-[--accent-dark] text-md group rounded-full focus:outline-none focus-visible:outline-none focus-visible:ring focus-visible:ring-offset-2">
+									<span class="!text-base !text-[--background]">Activo</span>
+								</div>
+								:
+								(
+									data?.status === 'in-progress' ?
+									<div class="inline-flex items-center justify-center gap-2 !px-3 py-2 space-x-2 bg-[--in-progress] transition focus-visible:ring-[--accent-dark] text-md group rounded-full focus:outline-none focus-visible:outline-none focus-visible:ring focus-visible:ring-offset-2">
+										<span class="!text-base !text-[--background]">En progreso</span>
+									</div>
+									:
+									(
+										data?.status === 'inactive' ?
+										<div class="inline-flex items-center justify-center gap-2 !px-3 py-2 space-x-2 bg-[--inactive] transition focus-visible:ring-[--accent-dark] text-md group rounded-full focus:outline-none focus-visible:outline-none focus-visible:ring focus-visible:ring-offset-2">
+											<span class="!text-base !text-[--background]">Inactivo</span>
+										</div>
+										:
+										<div class="inline-flex items-center justify-center gap-2 !px-3 py-2 space-x-2 bg-[--text-gray] transition focus-visible:ring-[--accent-dark] text-md group rounded-full focus:outline-none focus-visible:outline-none focus-visible:ring focus-visible:ring-offset-2">
+											<span class="!text-base !text-[--background]">En espera</span>
+										</div>
+										
+									)	
+								)
+							}
+						</div>
 						<span class="w-full font-semibold !text-lg">Tecnologías usadas:</span>
 						<div class="w-full flex-none flex flex-wrap gap-2 text-sm items-center justify-start overflow-y-auto overflow-x-hidden">
 							{(data?.technologies)?.map((tech:string) => (
@@ -147,11 +177,10 @@ let seo: SEOProps = {
 					<Content/>
 				</div>
 				<div class="col-span-2 w-full h-fit hidden xl:flex gap-4 flex-col items-center justify-start friendly-sticky !top-0">
-					<div class="aspect-video relative rounded-lg w-full border border-[--text-gray] overflow-hidden group flex items-center justify-center">
+					<div class="aspect-video relative rounded-lg w-full border border-[--text-grayRGBA] overflow-hidden group flex items-center justify-center">
 						{
 						data?.image ? 
-						<img src={data?.image} alt="" 
-						class="absolute grayscale inset-0 h-full w-full object-cover group-hover:scale-110 group-hover:grayscale-0 transition-transform duration-500 ease-in-out !border-none"/>
+						<Image src={data?.image} alt="Imagen del Proyecto " class="absolute inset-0 h-full w-full object-cover group-hover:scale-110 transition-transform duration-500 ease-in-out !border-none"/>
 						: 
 						<div class="absolute bg-gray-200 w-full h-full text-[--text] text-lg flex flex-col items-center justify-center">
 							<span class="material-symbols-rounded text-2xl">
@@ -161,7 +190,36 @@ let seo: SEOProps = {
 						</div>
 						}
 					</div>
-					<div class="w-full h-[1px] bg-[--text-gray]"></div>
+					<div class="w-full h-[1px] bg-[--text-gray-40]"></div>
+					<span class="w-full font-semibold !text-lg">Estado del proyecto:</span>
+					{/* published, in-progress, hold, inactive */}
+					<div class="w-full flex-none flex flex-wrap gap-2 text-sm items-center justify-start overflow-y-auto overflow-x-hidden">
+						{
+							data?.status === 'published' ?
+							<div class="inline-flex items-center justify-center gap-2 !px-3 py-2 space-x-2 bg-[--published] transition focus-visible:ring-[--accent-dark] text-md group rounded-full focus:outline-none focus-visible:outline-none focus-visible:ring focus-visible:ring-offset-2">
+								<span class="!text-base !text-[--background]">Activo</span>
+							</div>
+							:
+							(
+								data?.status === 'in-progress' ?
+								<div class="inline-flex items-center justify-center gap-2 !px-3 py-2 space-x-2 bg-[--in-progress] transition focus-visible:ring-[--accent-dark] text-md group rounded-full focus:outline-none focus-visible:outline-none focus-visible:ring focus-visible:ring-offset-2">
+									<span class="!text-base !text-[--background]">En progreso</span>
+								</div>
+								:
+								(
+									data?.status === 'inactive' ?
+									<div class="inline-flex items-center justify-center gap-2 !px-3 py-2 space-x-2 bg-[--inactive] transition focus-visible:ring-[--accent-dark] text-md group rounded-full focus:outline-none focus-visible:outline-none focus-visible:ring focus-visible:ring-offset-2">
+										<span class="!text-base !text-[--background]">Inactivo</span>
+									</div>
+									:
+									<div class="inline-flex items-center justify-center gap-2 !px-3 py-2 space-x-2 bg-[--text-gray] transition focus-visible:ring-[--accent-dark] text-md group rounded-full focus:outline-none focus-visible:outline-none focus-visible:ring focus-visible:ring-offset-2">
+										<span class="!text-base !text-[--background]">En espera</span>
+									</div>
+									
+								)	
+							)
+						}
+					</div>
 					<span class="w-full font-semibold !text-lg">Tecnologías usadas:</span>
 					<div class="w-full flex-none flex flex-wrap gap-2 text-sm items-center justify-start overflow-y-auto overflow-x-hidden">
 						{(data?.technologies)?.map((tech:string) => (

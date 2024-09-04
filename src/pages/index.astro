@@ -13,6 +13,11 @@ import ScrollCTA from '@/components/ScrollCTA.astro';
 import ProjectsPreview from '@/components/ProjectsPreview.astro';
 import CursorDecorator from '@/components/CursorDecorator.astro';
 import { type Props as SEOProps } from 'astro-seo';
+import ColorfulText from '@/components/ColorfulText.astro';
+
+import { Image } from 'astro:assets';
+import Avatar from '@/images/avatar.svg'; 
+import Background from '@/images/background.svg'; 
 
 let actualDate: Date = new Date();
 
@@ -54,8 +59,8 @@ let seo: SEOProps = {
 		<div id="block-container" class="container">
 			<section id="landing" class="flex flex-col-reverse xl:flex-row gap-1 max-w-screen-xl !mx-2.5 md:!mx-20 2xl:!mx-auto">
 				<div class="w-full h-full flex flex-col justify-center !px-4 !pb-8 md:!pb-0 items-start">
-					<h1 class="w-full text-start title !mb-2">GERARDO <span class="text-gradient">GALLEGOS</span></h1>
-					<h1 class="w-full text-start subtitle !mb-4">SEMI SENIOR FULL STACK WEB</h1>
+					<h1 class="w-full text-start title !mb-2">GERARDO <span class="text-gradient">GALLEGOS JR</span></h1>
+					<h1 class="w-full text-start subtitle !mb-4">MID SOFTWARE DEVELOPER</h1>
 					<p>Desarrollador con el objetivo de desarrollar innovaciones tecnológicas, estar en mejora constante y resolver desafios.</p>
 					<div class="w-full !mt-4 md:!mt-8 flex gap-2 flex-row items-center justify-start">
 						<LinkButton target="_blank" width="[14rem]" id="downloadCVButton" href="/assets/files/cv.pdf">
@@ -72,10 +77,11 @@ let seo: SEOProps = {
 					</div>
 				</div>
 				<div class="w-full h-full flex items-center justify-center !px-4 !py-4 md:!py-0">
-					<!-- //TODO: Cambiar por componente Image -->
 					 <div class="relative flex items-center justify-center md:h-[80%] max-w-screen-xl">
-						 <img class="z-5 absolute rounded-full !mb-[4rem]" src="./assets/images/background.svg" alt="Imágen de Ciudad Cyberpunk">
-						 <img class="z-10 h-[38vh] xl:h-fit image-mask !mt-[4rem]" src="./assets/images/avatar.svg" alt="avatar de Gerardo">
+						<Image src={Background} alt="Imágen de Ciudad Cyberpunk" class="z-5 absolute rounded-full !mb-[4rem]"/>
+						<Image src={Avatar} alt="Avatar de Gerardo" class="z-10 h-[38vh] xl:h-fit image-mask !mt-[4rem]"/>
+						 <!-- <img class="z-5 absolute rounded-full !mb-[4rem]" src="./assets/images/background.svg" alt="Imágen de Ciudad Cyberpunk">
+						 <img class="z-10 h-[38vh] xl:h-fit image-mask !mt-[4rem]" src="./assets/images/avatar.svg" alt="Avatar de Gerardo"> -->
 					 </div>
 				</div>
 			</section>
@@ -84,12 +90,14 @@ let seo: SEOProps = {
 					<h1 class="w-full bg-[--titleRGBA] backdrop-blur-sm supports-[backdrop-filter]:bg-[--titleRGBA] transition-all sticky top-0 md:static text-start !py-5">SOBRE <span class="text-gradient">MI</span></h1>
 					<div class="w-full flex flex-col items-center justify-center gap-4">
 						<p class="w-full">
-							Mi nombre es Gerardo Gallegos Jr, soy Ingeniero en Sistemas Computacionales enfocado en el desarrollo de Software como Full Stack Developer y actualmente estudiando una maestría 
+							Hola! Soy Gerardo Gallegos Jr. Ingeniero en Sistemas Computacionales enfocado en el desarrollo de Software como Full Stack Developer y actualmente estudiando una maestría 
 							en Ingeniería de Software para ser un mejor profesionista y brindar software de mayor calidad.
 						</p>
 						<p class="w-full">
 							Actualmente tengo el privilegio de hacer software con las últimas tecnologías en cuanto a desarrollo web e interfaces accesibles con un enfoque moderno 
-							para los clientes de una <a class="custom-link" target="_blank" rel="noopener noreferrer" href="https://cordovaindustrial.com/">empresa de automatización industrial</a>. 
+							para los clientes de una <a class="custom-link" target="_blank" rel="noopener noreferrer" href="https://cordovaindustrial.com/">empresa de automatización industrial</a>, 
+							para marcas que venden <a class="custom-link" target="_blank" rel="noopener noreferrer" href="https://intelihogar.com/">casas inteligentes</a> y que brindan el servicio de
+							<a class="custom-link" target="_blank" rel="noopener noreferrer" href="https://enegrin.com/">energias limpias</a>. 
 						</p>
 						<p class="w-full">
 							Mi objetivo es el mejorar de forma constante, aprender de todos mis errores y siempre resolver los desafíos complejos que requieren una solución complicada de entender. 
@@ -137,7 +145,7 @@ let seo: SEOProps = {
 							Correo electrónico: 
 						</p>
 						<div class="w-full flex items-center justify-start">
-							<a href="mailto:gera.g.dev@gmail.com" class="email text-lg">gera.g.dev@gmail.com</a>
+							<a href="mailto:gera.ga.dev@gmail.com" class="custom-link text-lg">gera.ga.dev@gmail.com</a>
 						</div>
 						<p class="w-full font-semibold text-lg">
 							O también puedes revisar: 
@@ -165,6 +173,7 @@ let seo: SEOProps = {
 						<span class="!text-[--text-gray] !mt-8 text-lg">Gerardo Gallegos Jr {actualDate.getFullYear()}©</span>
 						<p class="text-[--text-gray] text-lg text-center">Diseñado en Figma y codificado en VSCode por un servidor. Creado en el Framework Astro, Tailwind y CSS puro.
 							Implementado en Vercel. Tipografias Exo y Code Mono.
+							<!-- <ColorfulText/> -->
 						</p>
 					</div>
 				</div>
@@ -175,7 +184,7 @@ let seo: SEOProps = {
 			<EmailDecorator/>
 		</div>
 		<ScrollCTA/>
-		<!-- <CursorDecorator/> -->
+		<CursorDecorator/>
 	</main>
 </Layout>
 

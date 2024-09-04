@@ -1,23 +1,25 @@
 ---
 import { getCollection } from "astro:content";
 import LinkButton from './LinkButton.astro';
+import { Image } from 'astro:assets';
 
 interface project {
     title: string;
     technologies: string[];
     urls: {name: string, url: string}[];
-    image: string;
+    image: any;
     startDate: string;
     endDate: string;
     role: string;
     slug: string;
+    status: string;
     body: string;
 }
 
 const textProccesor = (text: string) => text.replace(/(`(?:``)?).*?\1|[\\*_{}[\]()#+\-.!`]/g, '');
 
 const projects = (await getCollection('projects')).map((item: any) => ({...item.data, slug: item.slug, body: textProccesor(item.body)}));
-console.log('projects>', projects);
+// console.log('projects>', projects);
 
 let lastProjects: project[] = projects.filter((item: any, index: any) => (index < 3));
 // console.log('lastProjects>', lastProjects);
@@ -37,24 +39,14 @@ let buttonStyle = `
 `;
 
 ---
-<div class="w-full flex flex-col items-center justify-center !gap-4">
-    {lastProjects?.map(({title, technologies, urls, image, startDate, endDate, role, slug, body}) => (
-        <div class="flex-none w-full h-full lg:h-[10rem] flex flex-col lg:flex-row gap-2 md:items-center justify-center">
-            <div class="aspect-video relative rounded-lg h-[10rem] lg:h-full border border-[--text-gray] overflow-hidden group flex items-center justify-center">
-                {/* <p class="two-line-trunc h-auto z-10 text-[--text] opacity-0 group-hover:opacity-100 transition-all !px-2">
-                    {title}
-                </p> */}
-                <a href={`/projects/${slug}`} class="z-10 w-full h-full flex items-center justify-center cursor-pointer text-[--text] opacity-0 group-hover:opacity-100 transition-all">
-                    Más detalles
-                    <span class="material-symbols-rounded">
-                        north_east
-                    </span>
-                </a>
-                <div class="absolute z-[5] bg-[--backgroundRGBA] backdrop-blur-sm supports-[backdrop-filter]:bg-[--backgroundRGBA] transition-all w-full h-full top-0 left-0 opacity-0 group-hover:opacity-100"></div>
+<div class="w-full flex flex-col items-center justify-center !gap-4 group/list">
+    {lastProjects?.map(({title, technologies, urls, image, startDate, endDate, role, status, slug, body}) => (
+        <div class="group transition-all flex-none w-full h-full lg:h-[10rem] flex flex-col lg:flex-row gap-2 md:items-center justify-center lg:hover:!opacity-100 lg:group-hover/list:opacity-50
+            motion-reduce:transition-none border border-transparent hover:lg:!bg-[--text-grayRGBA] rounded-md pr-2">
+            <div class="aspect-video relative rounded-md h-[10rem] lg:h-full border border-[--text-gray] overflow-hidden flex items-center justify-center">
                 {
                 image ? 
-                <img src={image} alt="" 
-                class="absolute grayscale inset-0 h-full w-full object-cover group-hover:scale-110 group-hover:grayscale-0 transition-transform duration-500 ease-in-out !border-none"/>
+                <Image src={image} alt="Imagen del Proyecto " class="absolute grayscale inset-0 h-full w-full object-cover group-hover:scale-110 group-hover:grayscale-0 transition-transform duration-500 ease-in-out !border-none"/>
                 : 
                 <div class="absolute bg-gray-200 w-full h-full text-[--text] flex flex-col items-center justify-center">
                     <span class="material-symbols-rounded text-2xl">
@@ -65,7 +57,36 @@ let buttonStyle = `
                 }
             </div>
             <div class="w-full h-full flex flex-col items-start justify-center">
-                <span class="font-semibold">{title}</span>
+                <div class="flex flex-row items-center justify-center w-full">
+                    <span class="font-semibold w-full">{title}</span>
+                    <div class="w-fit flex-none flex flex-wrap gap-2 text-sm items-center justify-center overflow-y-auto overflow-x-hidden">
+                        {
+                            status === 'published' ?
+                            <div class="inline-flex items-center justify-center gap-2 !px-3 space-x-2 bg-[--published] transition focus-visible:ring-[--accent-dark] text-md group rounded-full focus:outline-none focus-visible:outline-none focus-visible:ring focus-visible:ring-offset-2">
+                                <span class="!text-base !text-[--background]">Activo</span>
+                            </div>
+                            :
+                            (
+                                status === 'in-progress' ?
+                                <div class="inline-flex items-center justify-center gap-2 !px-3 space-x-2 bg-[--in-progress] transition focus-visible:ring-[--accent-dark] text-md group rounded-full focus:outline-none focus-visible:outline-none focus-visible:ring focus-visible:ring-offset-2">
+                                    <span class="!text-base !text-[--background]">En progreso</span>
+                                </div>
+                                :
+                                (
+                                    status === 'inactive' ?
+                                    <div class="inline-flex items-center justify-center gap-2 !px-3 space-x-2 bg-[--inactive] transition focus-visible:ring-[--accent-dark] text-md group rounded-full focus:outline-none focus-visible:outline-none focus-visible:ring focus-visible:ring-offset-2">
+                                        <span class="!text-base !text-[--background]">Inactivo</span>
+                                    </div>
+                                    :
+                                    <div class="inline-flex items-center justify-center gap-2 !px-3 space-x-2 bg-[--text-gray] transition focus-visible:ring-[--accent-dark] text-md group rounded-full focus:outline-none focus-visible:outline-none focus-visible:ring focus-visible:ring-offset-2">
+                                        <span class="!text-base !text-[--background]">En espera</span>
+                                    </div>
+                                    
+                                )	
+                            )
+                        }
+                    </div>
+                </div>
                 <div class="w-full flex gap-2 text-sm items-center justify-start overflow-y-auto overflow-x-hidden">
                     {filterTechnologies(technologies)?.map((tech, index) => (
                         <span class="capitalize px-2 border-[1px] border-[--accent-darker] rounded-full !text-[--accent-darker] flex-none flex items-center justify-center gap-1"> 
@@ -104,7 +125,7 @@ let buttonStyle = `
             </div>
         </div>
 
-        <div class="w-full h-[1px] bg-[--text-gray] last:!hidden lg:hidden"></div>
+        <div class="w-full h-[1px] bg-[--text-gray-40] last:!hidden lg:hidden"></div>
     ))}
 
 </div>

@@ -3,12 +3,12 @@
 ---
 
 <div id="scrollCTA-button" class="w-fit h-[5rem] cursor-pointer absolute right-1 md:right-auto bottom-0 hidden md:flex flex-col items-center justify-center opacity-90 z-[500]">
-    <div class="scrollCTA__body">
+    <div class="scrollCTA__body" id="scrollCTA-body">
         <span class="material-symbols-rounded">
             keyboard_double_arrow_down
         </span>
     </div>
-    <span class="scrollCTA__title">SCROLL</span>
+    <span class="scrollCTA__title" id="scrollCTA-title">DOWN</span>
 </div>
 
 <style>
@@ -56,19 +56,99 @@
     }
 </style>
 <script>
-    /* HTMLElement */
-    let blocksBody: HTMLElement | null = document.getElementById('block-container');
-    let scrollCTAButton: HTMLElement | null = document.getElementById('scrollCTA-button');
+    document.addEventListener("astro:page-load", () => {
+        /* HTMLElement */
+        let scrollCTAButton: HTMLElement | null = document.getElementById('scrollCTA-button');
+        const sections = document.querySelectorAll("section")
+        let scrollBody: HTMLElement | null = document.getElementById('scrollCTA-body');
+        let scrollTitle: HTMLElement | null = document.getElementById('scrollCTA-title');
+        console.log('SCROLL BODY', scrollBody);
+        
+        /* boolean */
+        let flag = true; //true = +   false = -
+    
+        /* number */
+        let pageCounter: number = 0;
+        // let viewWidth: number = window.innerWidth;
+        // let viewHeight: number = window.innerHeight;
+    
+         /* array */
+        let anchorIds = [
+            "home-button",
+            "about-button",
+            "experience-button",
+            "work-button",
+            "contact-button",
+        ];
+    
+        /* Init Zone */
+        scrollCTAButton !== null ? scrollCTAButton.addEventListener("click", (event) => {
+            if(flag) { pageCounter ++ } else { pageCounter = 0 }
+            clickElement(pageCounter);
+            if(pageCounter === 0) {
+                flag = true;
+            }
+            if(pageCounter === 4) {
+                flag = false;
+            }
+            
+            // scrollBody ? scrollBody.style.transform = `rotate(${flag ? '+' : '-'}180deg)` : null;
+            // scrollTitle ? scrollTitle.innerHTML = `${flag ? 'DOWN' : 'UP'}` : null;
+        }) : null;
 
-    /* number */
-    let viewWidth: number = window.innerWidth;
-    let viewHeight: number = window.innerHeight;
+        /* Functions Zone */
+        const clickElement = (index:number) => {
+            let element = document.getElementById(anchorIds[index]);
+            element ? element.click() : null;
+        };
 
-    /* Init Zone */
-    scrollCTAButton !== null ? 
-    scrollCTAButton.addEventListener("click", (event) => {
-        blocksBody !== null ? blocksBody.scrollTo(0,blocksBody.scrollTop + viewHeight) : null;
-    })
-    : null;
+        const callback = (entries: any[]) => {
+            entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                let index = anchorIds.findIndex((anchorId) => {
+                    let htmlElement = document.getElementById(anchorId);
+                    let atrribute: any = htmlElement ? htmlElement.getAttribute("aria-label"): '';
+                    return atrribute.includes(entry.target.id);
+                });
+                if(index !== -1) {
+                    pageCounter = index;
+
+                    if(pageCounter === 0) {
+                        flag = true;
+                        scrollBody ? scrollBody.style.transform = `rotate(0deg)` : null;
+                    }
+
+                    if(pageCounter === 4) {
+                        flag = false;
+                        scrollBody ? scrollBody.style.transform = `rotate(180deg)` : null;
+                    }
+
+                    scrollTitle ? scrollTitle.innerHTML = `${flag ? 'DOWN' : 'TOP'}` : null;
+                }
+            }
+            })
+        }
+    
+        const observer = new IntersectionObserver(callback, {
+            root: null,
+            rootMargin: "0px",
+            threshold: 0.3,
+        })
+    
+        sections.forEach((section) => {
+            observer.observe(section)
+        })
+    
+        // Cleanup function
+        document.onvisibilitychange = () => {
+            if (document.visibilityState === "hidden") {
+            observer.disconnect()
+            } else {
+            sections.forEach((section) => {
+                observer.observe(section)
+            })
+            }
+        }
+    });
 
 </script>

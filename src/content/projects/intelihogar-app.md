@@ -5,18 +5,19 @@ technologies: [
 ]
 urls: [
     {
-        name: 'InteliHom',
-        url: 'https://intelihom.com/landing'
+        name: 'PlayStore',
+        url: 'https://play.google.com/store/apps/details?id=tech.cidtcor.intelihogar&hl=es_MX'
     },
     {
-        name: 'InteliHogar',
-        url: 'https://intelihogar.com/landing'
+        name: 'AppStore',
+        url: 'https://apps.apple.com/mx/app/intelihogar/id1462539266'
     },
 ]
-image: "https://images.unsplash.com/photo-1504675099198-7023dd85f5a3?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+image: "./images/InteliHogar_App.svg"
 startDate: 2023-03-07
 endDate: 2023-06-09
 role: 'Developer, UI Designer'
+status: published
 ---
 InteliHogar es un proyecto creado por la área de innovación y desarrollo tecnológico de Córdova Industrial (CIDTcor), en el cual busca que cualquier persona pueda tener un ecosistema de casa inteligente completo con tan solo unos clicks. La aplicación ayuda a controlar y gestionar tus dispositivos inteligentes instalado en tu hogar, dicha app cuenta con habitaciones y con el control total de los dispositivos e invitaciones para que las personas puedan controlar ciertos dispositivos. 
 \

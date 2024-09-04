@@ -46,9 +46,6 @@ const { seo } = Astro.props;
 </html>
 <style is:global>
 	:root {
-		--mouse-x: 0px;
-  		--mouse-y: 0px;
-
 		--background: #FFFFFF;
 		--backgroundRGB: rgb(255,255,255);
 		--backgroundRGBA: rgba(255,255,255, 0.6);
@@ -58,13 +55,21 @@ const { seo } = Astro.props;
 		--textRGB: rgb(33, 35, 48);
 		--text-gray: #8B8B8B;
 		--text-grayRGB: rgb(139, 139, 139);
+		--text-grayRGBA: rgb(139, 139, 139, 0.1);
+		--text-gray-40: rgb(139, 139, 139, 0.4);
 		--accent: #3773E0;
 		--accentRGB: rgb(55,115,224);
+		--accent-radial: rgba(55,115,224,0.12);
 		--accent-darker: #3666A1;
 		--accent-darkerRGB: rgb(54, 102, 161);
 		--new-accent: #87BFFF;
 		--bright-accent: #0067ff;
 
+		/* published, in-progress, hold, inactive */
+		--published: #4E937A;
+		--in-progress: #F0A202;
+		--hold: #EFE9F4;
+		--inactive: #F24236;
 		/* --accent: 136, 58, 234;
 		--accent-light: 224, 204, 250;
 		--accent-dark: 49, 10, 101; */
@@ -85,14 +90,14 @@ const { seo } = Astro.props;
 	}
 
 	h1 {
-		font-size: 1.8rem;
+		font-size: 1.75rem;
 		/* font-weight: 700; */
 		line-height: 1;
 		text-align: start;
 		margin-top: 0.5rem;
 		margin-bottom: 0.5rem;
 		&.title {
-			font-size: 2.25rem;
+			font-size: 2rem;
 			text-indent: 0px;
 		}
 		&.subtitle {
@@ -103,21 +108,23 @@ const { seo } = Astro.props;
 
 	@media (min-width: 1024px) { 
 		h1 {
-			font-size: 2.25rem;
+			font-size: 1.75rem;
 			&.title {
-				font-size: 3rem;
+				font-size: 2.75rem;
 			}
 		}
 	}
 
 	.custom-link {
-		font-weight: 600;
 		cursor: pointer;
 		transition: 0.3s;
+		text-decoration-line: underline;
 	}
-
+	
 	.custom-link:hover {
+		font-weight: 600;
 		color: var(--bright-accent);
+		text-decoration-line: none;
 	}
 
 	.text-gradient {

@@ -97,6 +97,7 @@ const currentPath = Astro.url.pathname;
     }
 
     .tooltip {
+      transition: 0.3s;
       color: var(--text-gray);
       border: 2px solid var(--text-gray);
       background-color: var(--background);
@@ -126,6 +127,7 @@ const currentPath = Astro.url.pathname;
     .active {
         border-color: var(--bright-accent);
         color: var(--bright-accent);
+        transition: 0.3s;
         /* background: linear-gradient(45deg, var(--accent-darker) 0%, var(--accent) 100%) ;
         color: white; */
         /* -webkit-background-clip: text;
@@ -172,13 +174,13 @@ const currentPath = Astro.url.pathname;
 </style>
 <script>
 document.addEventListener("astro:page-load", () => {
-    console.log('page load', window.location.pathname);
+    // console.log('page load', window.location.pathname);
     if( window.location.pathname === '/') {
 
       const sections = document.querySelectorAll("#block-container section")
       const navItems = document.querySelectorAll("nav a")
-      console.log('#block-container sections', sections);
-      console.log('navItems', navItems);
+      // console.log('#block-container sections', sections);
+      // console.log('navItems', navItems);
   
       const callback = (entries: any[]) => {
         entries.forEach((entry) => {
