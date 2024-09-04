@@ -5,10 +5,11 @@ technologies: [
 ]
 urls: [
 ]
-image: "https://images.unsplash.com/photo-1504675099198-7023dd85f5a3?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+image: "./images/Script_PDF.svg"
 startDate: 2024-03-12
 endDate: 2024-03-13
 role: 'Developer, UI Designer'
+status: published
 ---
 El Script Generador de Memorias de Cálculo fue un código hecho para un proyecto de Córdova Industrial Integradores, que se encargaba de generar multiples documentos que eran extraídos de un excel (".xlsx" y ".csv") en donde se realizaban todos los cálculos para las memorias de calculo, luego convirtiendolos a archivos de word (".doc" y ".docx") para realizar su entrega. El script fue realizado en JavaScript y node.js, usando la libreria npm llamada "docx".
 \

@@ -9,10 +9,11 @@ urls: [
         url: 'https://enegrin.com'
     },
 ]
-image: "https://images.unsplash.com/photo-1504675099198-7023dd85f5a3?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+image: "./images/Enegrin_Pagina.svg"
 startDate: 2023-08-11
 endDate: 2024-03-11
 role: 'Developer, UI Designer'
+status: published
 ---
 Enegrin es un proyecto creado por la área de innovación y desarrollo tecnológico de Córdova Industrial (CIDTcor), en el cual se busca que las 
 empresas productoras mexicanas cuenten con energías verdes, con una mayor calidad y estabilidad para evitar que dichas empresas detengan la producción de 
