@@ -23,7 +23,7 @@ interface project {
 export async function getStaticPaths() {
     const projects = await getCollection('projects');
 
-    return projects.map((item) => (
+    return projects.map((item:any) => (
         {
             params: {slug: item.slug},
             props: item,
@@ -53,7 +53,7 @@ const textProccesor = (text: string) => text.replace(/(`(?:``)?).*?\1|[\\*_{}[\]
 const projects = await getCollection('projects');
 
 const { slug } = Astro.params;
-const project: any = projects.find((page) => page.slug === slug);
+const project: any = projects.find((page:any) => page.slug === slug);
 if(!project) return Astro.redirect("/404");
 // const { data } = project.map((item: any) => ());
 const data = {...project.data, slug: project.slug, body: textProccesor(project.body)}

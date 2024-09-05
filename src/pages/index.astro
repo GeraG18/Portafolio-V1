@@ -17,7 +17,6 @@ import { type Props as SEOProps } from 'astro-seo';
 import { Image } from 'astro:assets';
 import Avatar from '@/images/avatar.svg'; 
 import Background from '@/images/background.svg';
-import SEOImage from '@/images/SEO.svg'; 
 
 let actualDate: Date = new Date();
 
@@ -28,7 +27,7 @@ let seo: SEOProps = {
 		basic: {
 			title: "Portafolio | Gerardo G.",
 			type: "website",
-			image: SEOImage.src,
+			image: '/SEO.svg',
 		}
 	},
 	extend:{
