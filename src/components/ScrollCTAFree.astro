@@ -1,0 +1,73 @@
+---
+/* props here */
+---
+
+<div id="scrollCTA-button" class="w-fit h-[5rem] cursor-pointer transition-all absolute right-1 md:right-auto bottom-0 md:flex flex-col items-center justify-center z-[500]">
+    <div class="scrollCTA__body" id="scrollCTA-body">
+        <span class="material-symbols-rounded">
+            keyboard_double_arrow_down
+        </span>
+    </div>
+    <span class="scrollCTA__title" id="scrollCTA-title">SCROLL</span>
+</div>
+
+<style>
+    .scrollCTA__body {
+        border: 1px solid var(--text-gray);
+        border-radius: 9999px;
+        width: 1.5rem;
+        height: 3rem;
+        flex: none;
+        display: flex;
+        justify-content: center;
+        /* align-items: center; */
+    }
+
+    .scrollCTA__body span {
+        -webkit-animation-duration: 1.8s;
+        animation-duration: 1.8s;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+        -webkit-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
+        -webkit-animation-name: scroll;
+        animation-name: scroll;
+    }
+
+    @keyframes scroll {
+    0% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: translateY(20px);
+        -ms-transform: translateY(20px);
+        transform: translateY(20px);
+    }
+    }
+
+    .scrollCTA__title {
+        flex: none;
+        color: var(--text-gray);
+        font-size: 1rem;
+    }
+</style>
+<script>
+    document.addEventListener("astro:page-load", () => {
+        /* HTMLElement */
+        let scrollCTAButton: HTMLElement | null = document.getElementById('scrollCTA-button');
+        let body: HTMLElement | null = document.getElementById("block-container");
+
+        /* Number */
+        let verticalScroll = (body ? body.scrollHeight : 0) > (body ? body.clientHeight : 0); 
+        // let horizontalScroll = (body ? body.scrollWidth : 0) > (body ? body.clientWidth : 0); 
+        
+        /* Init Zone */
+        scrollCTAButton ? scrollCTAButton.style.opacity = (verticalScroll ? `0.9` : `0`) : null;
+        
+    });
+
+</script>

@@ -1,9 +1,8 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from "astro:content";
-import ScrollCTA from '@/components/ScrollCTA.astro';
+import ScrollCTAFree from '@/components/ScrollCTAFree.astro';
 import EmailDecorator from '@/components/EmailDecorator.astro';
-import ScrollNumber from '@/components/ScrollNumber.astro';
 import NavigationBack from '@/components/NavigationBack.astro';
 import { type Props as SEOProps } from 'astro-seo';
 import CursorDecorator from '@/components/CursorDecorator.astro';
@@ -175,7 +174,7 @@ let seo: SEOProps = {
 			<!-- <ScrollNumber/> -->
 			<EmailDecorator/>
 		</div>
-		<ScrollCTA/>
+		<ScrollCTAFree/>
 		<CursorDecorator/>
 		<div class="w-full h-[3rem] bg-[--background] fixed top-0 left-0 z-[10] mask-image"></div>
 		<div class="w-full h-[3rem] bg-[--background] fixed bottom-0 left-0 z-[10] mask-image rotate-180"></div>
