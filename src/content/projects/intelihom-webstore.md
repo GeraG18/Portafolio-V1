@@ -9,7 +9,7 @@ urls: [
         url: 'https://intelihom.com/landing'
     },
 ]
-image: "@/content/projects/images/InteliHogar_Tienda.svg"
+image: "./InteliHogar_Tienda.svg"
 startDate: 2023-04-25
 endDate: 2023-08-07
 role: 'Developer, UI Designer'

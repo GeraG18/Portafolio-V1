@@ -8,6 +8,7 @@ import NavigationBack from '@/components/NavigationBack.astro';
 import { type Props as SEOProps } from 'astro-seo';
 import { Image } from 'astro:assets';
 import CursorDecorator from '@/components/CursorDecorator.astro';
+import SEOImage from '@/images/SEO.svg';
 
 const projects = (await getCollection('projects')).map((item: any) => ({...item.data, slug: item.slug}));
 
@@ -85,7 +86,7 @@ let seo: SEOProps = {
 		basic: {
 			title: "Todos los Proyectos | Gerardo G.",
 			type: "website",
-			image: "https://user-images.githubusercontent.com/5182256/131216951-8f74f425-f775-463d-a11b-0e01ad9fce8d.png",
+			image: SEOImage.src,
 		}
 	},
 	extend:{

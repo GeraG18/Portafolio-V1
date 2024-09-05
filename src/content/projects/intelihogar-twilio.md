@@ -5,7 +5,7 @@ technologies: [
 ]
 urls: [
 ]
-image: "@/content/projects/images/InteliBot.svg"
+image: "./InteliBot.svg"
 startDate: 2023-06-13
 endDate: 2023-06-30
 role: 'Developer, UI Designer'

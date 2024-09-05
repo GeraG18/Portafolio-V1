@@ -1,6 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
 import ScrollNumber from '../components/ScrollNumber.astro';
 import NavigationBar from '../components/NavigationBar.astro';
 import EmailDecorator from '../components/EmailDecorator.astro';
@@ -8,16 +7,17 @@ import LinkButton from '@/components/LinkButton.astro';
 import DownloadIcon from '@/components/DownloadIcon.astro';
 import Timeline from '@/components/Timeline.astro';
 
-import {experience, studies} from '../env/strings'; 
+import {studies} from '../env/strings'; 
 import ScrollCTA from '@/components/ScrollCTA.astro';
 import ProjectsPreview from '@/components/ProjectsPreview.astro';
 import CursorDecorator from '@/components/CursorDecorator.astro';
 import { type Props as SEOProps } from 'astro-seo';
-import ColorfulText from '@/components/ColorfulText.astro';
+// import ColorfulText from '@/components/ColorfulText.astro';
 
 import { Image } from 'astro:assets';
 import Avatar from '@/images/avatar.svg'; 
-import Background from '@/images/background.svg'; 
+import Background from '@/images/background.svg';
+import SEOImage from '@/images/SEO.svg'; 
 
 let actualDate: Date = new Date();
 
@@ -28,7 +28,7 @@ let seo: SEOProps = {
 		basic: {
 			title: "Portafolio | Gerardo G.",
 			type: "website",
-			image: "https://user-images.githubusercontent.com/5182256/131216951-8f74f425-f775-463d-a11b-0e01ad9fce8d.png",
+			image: SEOImage.src,
 		}
 	},
 	extend:{

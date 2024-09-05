@@ -13,7 +13,7 @@ urls: [
         url: 'https://intelihogar.com/landing'
     },
 ]
-image: "@/content/projects/images/JMAS.svg"
+image: "./JMAS.svg"
 startDate: 2023-04-12
 endDate: 2023-08-02
 role: 'Developer, UI Designer'

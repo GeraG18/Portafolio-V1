@@ -40,7 +40,7 @@ let buttonStyle = `
 
 ---
 <div class="w-full flex flex-col items-center justify-center !gap-4 group/list">
-    {lastProjects?.map(({title, technologies, urls, image, startDate, endDate, role, status, slug, body}) => (
+    {lastProjects?.map(({title, technologies, urls, image, status, slug, body}) => (
         <div class="group transition-all flex-none w-full h-full lg:h-[10rem] flex flex-col lg:flex-row gap-2 md:items-center justify-center lg:hover:!opacity-100 lg:group-hover/list:opacity-50
             motion-reduce:transition-none border border-transparent hover:lg:!bg-[--text-grayRGBA] rounded-md pr-2">
             <div class="aspect-video relative rounded-md h-[10rem] lg:h-full border border-[--text-gray] overflow-hidden flex items-center justify-center">

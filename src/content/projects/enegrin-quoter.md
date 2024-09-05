@@ -5,7 +5,7 @@ technologies: [
 ]
 urls: [
 ]
-image: "@/content/projects/images/Enegrin_Cotizador.svg"
+image: "./Enegrin_Cotizador.svg"
 startDate: 2024-01-09
 endDate: 2024-01-12
 role: 'Developer, UI Designer'
