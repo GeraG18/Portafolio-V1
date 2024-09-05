@@ -13,7 +13,7 @@ urls: [
         url: 'https://play.google.com/store/apps/details?id=com.nevermore.controldepozos&hl=es_MX'
     },
 ]
-image: "./images/JMAS.svg"
+image: "@/content/projects/images/JMAS.svg"
 startDate: 2023-04-12
 endDate: 2023-08-02
 role: 'Developer, UI Designer'

@@ -5,7 +5,7 @@ technologies: [
 ]
 urls: [
 ]
-image: "./images/InteliHogar_Monitoreo.svg"
+image: "@/content/projects/images/InteliHogar_Monitoreo.svg"
 startDate: 2023-06-13
 endDate: 2023-06-30
 role: 'Developer, UI Designer'

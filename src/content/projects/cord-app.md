@@ -11,7 +11,7 @@ urls: [
         url: 'https://apps.apple.com/mx/app/cord/id6559758124'
     },
 ]
-image: "./images/cord.svg"
+image: "@/content/projects/images/cord.svg"
 startDate: 2024-07-02
 endDate: ACTUALIDAD
 role: 'Developer, UI Designer'

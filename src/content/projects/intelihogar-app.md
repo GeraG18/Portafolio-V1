@@ -13,7 +13,7 @@ urls: [
         url: 'https://apps.apple.com/mx/app/intelihogar/id1462539266'
     },
 ]
-image: "./images/InteliHogar_App.svg"
+image: "@/content/projects/images/InteliHogar_App.svg"
 startDate: 2023-03-07
 endDate: 2023-06-09
 role: 'Developer, UI Designer'

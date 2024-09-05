@@ -16,7 +16,7 @@ urls: [
         url: 'https://apps.apple.com/ec/app/enegrin/id6463267797'
     },
 ]
-image: "./images/Enegrin_App.svg"
+image: "@/content/projects/images/Enegrin_App.svg"
 startDate: 2023-08-11
 endDate: ACTUALIDAD
 role: 'Developer, UI Designer'

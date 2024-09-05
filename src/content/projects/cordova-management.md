@@ -4,7 +4,7 @@ technologies: [
     "angular", "sass", "tailwind"
 ]
 urls: []
-image: "./images/Obras_Cordova.svg"
+image: "@/content/projects/images/Obras_Cordova.svg"
 startDate: 2023-09-28
 endDate: 2024-07-02
 role: 'Developer, UI Designer'

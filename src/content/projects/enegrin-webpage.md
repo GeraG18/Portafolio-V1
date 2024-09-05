@@ -9,7 +9,7 @@ urls: [
         url: 'https://enegrin.com'
     },
 ]
-image: "./images/Enegrin_Pagina.svg"
+image: "@/content/projects/images/Enegrin_Pagina.svg"
 startDate: 2023-08-11
 endDate: 2024-03-11
 role: 'Developer, UI Designer'

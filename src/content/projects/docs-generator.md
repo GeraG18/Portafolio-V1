@@ -5,7 +5,7 @@ technologies: [
 ]
 urls: [
 ]
-image: "./images/Script_PDF.svg"
+image: "@/content/projects/images/Script_PDF.svg"
 startDate: 2024-03-12
 endDate: 2024-03-13
 role: 'Developer, UI Designer'

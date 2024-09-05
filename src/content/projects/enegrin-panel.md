@@ -9,7 +9,7 @@ urls: [
     #     url: 'https://intelihogar.com/landing'
     # },
 ]
-image: "./images/Enegrin_Panel.svg"
+image: "@/content/projects/images/Enegrin_Panel.svg"
 startDate: 2024-02-28
 endDate: ACTUALIDAD
 role: 'Developer, UI Designer'
